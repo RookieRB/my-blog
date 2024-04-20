@@ -1,0 +1,1 @@
+export const HEADER_SHOW_SCROLL_Y = 200
