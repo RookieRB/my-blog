@@ -30,7 +30,7 @@ const LoginBg = memo(() => {
       </span>
       
       <video muted autoPlay="autoplay" loop="loop" className="bgv" ref={videoRef}>
-	      <source src={require("@/assets/video/background.mp4")} type="video/mp4" ></source>
+	      {/* <source src={require("@/assets/video/background.mp4")} type="video/mp4" ></source> */}
       </video>
     </BgWrapper>
   )

@@ -6,7 +6,7 @@ import SongStandardPanelWrapper from './style'
 import SongStandardPanelItem from './cps/SongStandardPanelItem'
 
 const SongStandardPanel = memo((props) => {
-  const {itemData} = props
+  const {itemData,tabClick} = props
   return (
     <SongStandardPanelWrapper>
       <div className="songStandard-panel-title">
@@ -18,13 +18,15 @@ const SongStandardPanel = memo((props) => {
       <div className="songStandard-panel-subtitle">
         空间音感
       </div>
-      <SongStandardPanelItem itemData={itemData[5]}/>
+      <SongStandardPanelItem itemData={itemData[0]} tabClick={tabClick}/>
       <div className="songStandard-panel-subtitle">
         音质
       </div>
       {
-        itemData.slice(0,5).reverse().map((item,index) => {
-          return <SongStandardPanelItem itemData={item} key={index}/>
+        itemData.slice(1,6).map((item,index) => {
+          return (
+             <SongStandardPanelItem itemData={item} tabClick={tabClick} key={index}/>
+          )
         })
       }
     </SongStandardPanelWrapper>
@@ -32,7 +34,8 @@ const SongStandardPanel = memo((props) => {
 })
 
 SongStandardPanel.propTypes = {
-  itemData: PropTypes.array
+  itemData: PropTypes.array,
+  tabClick: PropTypes.func
 }
 
 export default SongStandardPanel

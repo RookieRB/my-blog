@@ -4,9 +4,13 @@ import React, { memo } from 'react'
 import SongStandardPanelItemWrapper from './style'
 
 const SongStandardPanelItem = memo((props) => {
-  const {itemData} = props
+  const {itemData,tabClick} = props
+
+  function SongStandradPanelItemChoseHandler(itemShowName){
+    tabClick(itemShowName)
+  }
   return (
-    <SongStandardPanelItemWrapper>
+    <SongStandardPanelItemWrapper onClick= {e => SongStandradPanelItemChoseHandler(itemData.showName)}>
       <div className="songStandard-panel-item-icon">
         {itemData.icon}
       </div>
