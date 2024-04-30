@@ -16,12 +16,21 @@ const PageLeaveMessageWrapper = styled.div`
       object-fit:  cover;
     }
   }
-  .messagePanel{
+  .content{
     position: absolute;
+    display: flex;
     top: 100vh;
-    height: 2000px;
     width: 100%;
-    background-color: #fff;
+    background-color: transparent;
+    .messagePanel{
+      margin: 0 auto;
+      width: 1200px;
+      height: 2000px;
+      background-color: rgb(255,255,255,.6);
+      .img{
+
+      }
+    }
   }
 `
 

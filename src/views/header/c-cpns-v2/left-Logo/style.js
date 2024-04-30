@@ -7,8 +7,8 @@ const LeftWrapper = styled.div`
   font-family: 'Moe-Mashiro', 'Merriweather Sans', Helvetica, Tahoma, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei', sans-serif;
   position: relative;
   margin: 25px 20px;
+  flex: 0 0 233px;
   
- 
   .left{
     padding: 2px 2px;
     background-color: rgba(255, 255, 255, .5);

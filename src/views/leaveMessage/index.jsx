@@ -3,6 +3,7 @@ import React, { memo } from 'react'
 
 import PageLeaveMessageWrapper from './style'
 import Header from '../header'
+import MessagePanel from './messagePanel'
 
 const PageLeaveMessage = memo(() => {
   return (
@@ -11,24 +12,10 @@ const PageLeaveMessage = memo(() => {
       <div className="leaveMessage-img">
         <img src={require("@/assets/imgs/bg6.jpg")} alt="" />
       </div>
-      <div className="messagePanel">
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
-        你好啊
+      <div className="content">
+        <div className="messagePanel">
+          <MessagePanel/>
+        </div>
       </div>
     </PageLeaveMessageWrapper>
   )
