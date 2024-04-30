@@ -4,7 +4,7 @@ const HomeWrapper = styled.div`
   background-color: #FFF5EE;
   >.content{
     justify-content: center;
-    width: 850px;
+    width: 1000px;
     margin: 0 auto;
     background-color: #fff;
     padding-top: 10px;

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { memo,useRef } from 'react'
+import React, { memo } from 'react'
 
 import CardWrapper from './style'
 import CommentSVG from '@/assets/svg/page-card/CommentSVG'
@@ -11,6 +11,8 @@ import MoreSVG from '@/assets/svg/page-card/MoreSVG'
 const PageCardV2 = memo((props) => {
   // 是否左边显示图片
   const { isLeftShowImg = false, infoData}  = props
+
+  console.log(infoData)
   return (
     <CardWrapper>
       <div className="pageCard">
@@ -18,7 +20,7 @@ const PageCardV2 = memo((props) => {
           isLeftShowImg
           &&
           <div className="rightPage">
-            <img src={infoData?.imgUrl}/>
+            <img src={infoData?.articleImg} alt=""/>
           </div>
         }
         <div className="leftPage">
@@ -29,14 +31,14 @@ const PageCardV2 = memo((props) => {
             </div>
             <div className="page-description">
               <p>
-              {infoData?.description}
+              {infoData?.articleSummary}
               </p>
             </div>
             <div className="page-info">
               <div className="hot-look">
                 <EyeSVG/>
                 <span>
-                  {infoData?.hotLook}  热度
+                  {infoData?.readCount}  热度
                 </span>
               </div>
               <div className="comment-count">
@@ -48,7 +50,7 @@ const PageCardV2 = memo((props) => {
               <div className="publish-user">
                 <FolderSVG/>
                 <span>
-                  {infoData?.publishUser}
+                  {infoData?.articleUser}
                 </span>
               </div>
              
@@ -63,7 +65,7 @@ const PageCardV2 = memo((props) => {
                 <div className="publish-date">
                     <TimeSVG/>
                     <span>
-                      发布于 {infoData?.publishDate}
+                      发布于 {infoData?.pushDate}
                     </span>
                 </div>
               </div>
@@ -76,7 +78,7 @@ const PageCardV2 = memo((props) => {
                 <div className="publish-date-left">
                     <TimeSVG/>
                     <span>
-                      发布于 {infoData?.publishDate}
+                      发布于 {infoData?.pushDate}
                     </span>
                 </div>
                 <div className="page-more">
@@ -92,7 +94,7 @@ const PageCardV2 = memo((props) => {
           !isLeftShowImg
           &&
           <div className="rightPage">
-            <img src={infoData?.imgUrl}/>
+            <img src={infoData?.articleImg} alt=""/>
           </div>
         }
       </div>

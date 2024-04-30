@@ -10,21 +10,41 @@ import musicBottomRightUtilsData from '@/assets/data/Music/MusicBottom/MusicBott
 import musicBottomRightSongStandardData from '@/assets/data/Music/MusicBottom/MusicBottomRightSongStandardData'
 import MusicFooterUtilsItem from '../musicFooterUtilsItem'
 import SongStandardPanel from '@/components/Music/SongStandardPanel'
-
+import SoundEffectPanel from '@/components/Music/SoundEffectPanel'
+import MusicPlayList from '@/components/Music/MusicPlayList'
 const MusicFooterRight = memo(() => {
   /**
    * 内部变量
    */
-  // 控制songStandard-panel出现与消失
+  // 变量控制songStandard-panel出现与消失
   const [isShowSongStandardPanel,setIsShowSongStandardPanel] = useState(false)
-  // 控制当前展示哪个songStandard-icon 的showname
+  // 变量控制当前展示哪个songStandard-icon 的showname
   const [currentItemDataShowName,setCurrentItemDataShowName] = useState(musicBottomRightSongStandardData[musicBottomRightSongStandardData.length - 1].showName)
+  // 变量控制 SoundEffectPanel面板出现与消失
+  const [isShowSoundEffectPanel,setIsShowSoundEffectPanel] = useState(false)
+  // 变量控制 MusicPlayList面板出现与消失
+  const [isShowMusicPlayList,setIsShowMusicPlayList] = useState(false)
+  
   /**
    * 函数处理逻辑
    */
   // 控制songStandard-panel出现与消失
-  function SongStandardPanelShowHandler(){
+  function songStandardPanelShowHandler(){
     setIsShowSongStandardPanel(!isShowSongStandardPanel)
+  }
+
+  // 控制 (会员音效,桌面歌词,播放列表) 三个面板的显示
+  function soundEffectPanelShowHandler(prompt){
+    if(prompt === '会员音效'){
+      // 控制SoundEffectPanel面板出现与消失
+      setIsShowSoundEffectPanel(!isShowSoundEffectPanel)
+    }else if(prompt === '桌面歌词'){
+      // 控制歌词面板出现与消失
+    }else{
+      // 控制播放列表面板出现与消失 
+      setIsShowMusicPlayList(!isShowMusicPlayList)
+    }
+    
   }
 
   //  改变music-footer-right-songStandard-icon 中 data的名字
@@ -34,7 +54,7 @@ const MusicFooterRight = memo(() => {
   },[])
   return (
     <MusicFooterRightWrapper>
-      <div className="music-footer-right-songStandard" onClick={SongStandardPanelShowHandler}>
+      <div className="music-footer-right-songStandard" onClick={songStandardPanelShowHandler}>
         <div className="music-footer-right-songStandard-icon">
           {
             currentItemDataShowName
@@ -52,7 +72,9 @@ const MusicFooterRight = memo(() => {
       {
         musicBottomRightUtilsData.map((item,index) => {
           return (
-            <MusicFooterUtilsItem iconData={item} key={index}/>
+            <div className="panelController" onClick={e => soundEffectPanelShowHandler(item.prompt)} key={index}>
+              <MusicFooterUtilsItem iconData={item} key={index}/>
+            </div> 
           )
         })
       }
@@ -68,7 +90,22 @@ const MusicFooterRight = memo(() => {
           tooltip={{ open: false}}
         />
       </div>
-     
+      {
+        isShowSoundEffectPanel
+        &&
+        <div className="music-footer-right-soundEffectPanel">
+          <SoundEffectPanel/>
+        </div>
+      }
+      {
+        isShowMusicPlayList
+        &&
+        <div className="music-footer-right-musicPlayList">
+          <MusicPlayList/>
+        </div>
+      }
+      
+      
     </MusicFooterRightWrapper>
   )
 })

@@ -17,6 +17,9 @@ const LowerContainer = forwardRef((props,ref) => {
       case "Music":
         navigate("/music")
         break;
+      case "LeaveMessage":
+        navigate("/leaveMessage")
+        break;
       default:
         break;
     }
@@ -28,7 +31,7 @@ const LowerContainer = forwardRef((props,ref) => {
           containerArray.map((item,index) => {
             return (
               <div className="item" key={index} onClick={e => gotoPageHandler(item)}>
-                <span>{item.name}</span>
+                <span>{item.title}</span>
               </div>
             )
           })

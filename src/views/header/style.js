@@ -6,8 +6,8 @@ const HeaderWrapper = styled.div`
   height: 75px;
   position: fixed;
   top: 0;
-  display: flex;
   z-index: 999;
+  display: flex;
 `
 
 export default HeaderWrapper

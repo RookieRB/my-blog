@@ -18,6 +18,7 @@ const MusicFooterUtilsItemWrapper = styled.div`
       border: 1px solid black;
       padding: 2px;
       font-size: 11px;
+      z-index: 999;
     }
   }
   .music-footer-utils-bottom-item-function{
@@ -33,14 +34,7 @@ const MusicFooterUtilsItemWrapper = styled.div`
       }
     }
   }
-  @keyframes toBig {
-      from {
-        transform: scale(1);
-      }
-      to {
-        transform: scale(1.05);
-      }
-    }
+  
   .music-footer-utils-bottom-item-functionV2{
     &:hover{
       cursor: pointer;

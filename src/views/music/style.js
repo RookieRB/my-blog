@@ -3,9 +3,11 @@ import styled from 'styled-components'
 
 const MusicWrapper = styled.div`
   background-color: #FFF5EE;
+  overflow: hidden;
+ 
   .top-img{
     width: 100vw;
-    height: 600px;
+    height: 50vh;
     img{
       width: 100%;
       height: 100%;

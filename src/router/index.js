@@ -5,7 +5,7 @@ import LoginPage from "@/views/pageLogin";
 import HomeContent from "@/views/home/c-cpns/Home-content";
 import PageRegister from "@/views/pageLogin/pageRegister";
 import GetPassword from "@/views/pageGetPassword";
-
+import PageLeaveMessage from "@/views/leaveMessage";
 
 import PageMusic from "@/views/music";
 import PageMusicBoke from "@/views/music/c-cpns/music-views/PageMusicBoke";
@@ -13,7 +13,6 @@ import PageMusicCommunity from "@/views/music/c-cpns/music-views/PageMusicCommun
 import PageMusicFeatured from "@/views/music/c-cpns/music-views/PageMusicFeatured";
 import PageMusicRecommend from "@/views/music/c-cpns/music-views/PageMusicRecommend";
 import PageMusicRoaming from "@/views/music/c-cpns/music-views/PageMusicRoaming";
-
 import PageMusicMyFavorite from "@/views/music/c-cpns/music-views/PageMusicMyFavorite";
 import PageMusicLastPlay from "@/views/music/c-cpns/music-views/PageMusicLastPlay";
 import PageMusicMyBoke from "@/views/music/c-cpns/music-views/PageMusicMyBoke";
@@ -21,6 +20,7 @@ import PageMusicMyCollection from "@/views/music/c-cpns/music-views/PageMusicMyC
 import PageMusicLoadingManagement from "@/views/music/c-cpns/music-views/PageMusicLoadingManagement";
 import PageMusicLocalMusic from "@/views/music/c-cpns/music-views/PageMusicLocalMusic";
 import PageMusicMyYunMusic from "@/views/music/c-cpns/music-views/PageMusicMyYunMusic";
+
 
 const routes = [
     {
@@ -36,6 +36,10 @@ const routes = [
                 element: <HomeContent/>
             }
         ]
+    },
+    {
+        path:"/leaveMessage",
+        element: <PageLeaveMessage/>
     },
     {
         path: "/login",
@@ -103,6 +107,7 @@ const routes = [
             }
         ]
     }
+    
     
 ]
 

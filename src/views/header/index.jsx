@@ -20,15 +20,18 @@ const Header = memo(() => {
   // 获取lowerContainer组件
   const lowerContainerRef = useRef()
   const headerRef = useRef()
+
+  // header背景颜色
+  const headerBackGroundColor = "rgba(255, 255, 255, .95)"
   /**
    * 函数处理
    */
   // 鼠标移入lowerContainer处理事件
   function mouseEnterHandler(){ 
-    if(window.screenY < HEADER_SHOW_SCROLL_Y ){
+    if(window.scrollY < HEADER_SHOW_SCROLL_Y ){
       lowerContainerRef.current.style.visibility = 'visible'
       lowerContainerRef.current.style.transform = 'translateX(50%)'
-      headerRef.current.style.backgroundColor = '#fff' 
+      headerRef.current.style.backgroundColor = headerBackGroundColor 
     }
    
   }
@@ -39,40 +42,41 @@ const Header = memo(() => {
       lowerContainerRef.current.style.transform = 'translateX(100%)'
       headerRef.current.style.backgroundColor = 'transparent'
     }
-    
   }
 
   /**
    * 生命周期
    */
+  // 滑动到一定程度header变白
+  function showHeaderColor(){
+    let windowScroll = window.scrollY
+    if( windowScroll< HEADER_SHOW_SCROLL_Y){
+      if(lowerContainerRef.current.style.visibility === 'visible'){
+        lowerContainerRef.current.style.transform = 'translateX(100%)'
+        lowerContainerRef.current.style.visibility = 'hidden'
+      }
+      if(headerRef.current.style.backgroundColor !== 'transparent'){
+        headerRef.current.style.backgroundColor = 'transparent'
+      }
+          
+    }else{
+      if(lowerContainerRef.current.style.visibility === 'hidden'){
+        lowerContainerRef.current.style.visibility = 'visible'
+        lowerContainerRef.current.style.transform = 'translateX(50%)'
+      }
+      if(headerRef.current.style.backgroundColor !== headerBackGroundColor){
+        headerRef.current.style.backgroundColor = headerBackGroundColor 
+      }  
+    }
+    
+  }
+
   useEffect(() => {
     // 确保ref已经关联到DOM元素
     if (lowerContainerRef.current) {
       lowerContainerRef.current.style.visibility = 'hidden'
     }
-    // 滑动到一定程度header变白
-    function showHeaderColor(){
-      let windowScroll = window.scrollY
-      if( windowScroll< HEADER_SHOW_SCROLL_Y){
-        if(lowerContainerRef.current.style.visibility === 'visible'){
-          lowerContainerRef.current.style.transform = 'translateX(100%)'
-          lowerContainerRef.current.style.visibility = 'hidden'
-        }
-        if(headerRef.current.style.backgroundColor !== 'transparent'){
-          headerRef.current.style.backgroundColor = 'transparent'
-        }
-            
-      }else{
-        if(lowerContainerRef.current.style.visibility === 'hidden'){
-          lowerContainerRef.current.style.visibility = 'visible'
-          lowerContainerRef.current.style.transform = 'translateX(50%)'
-        }
-        if(headerRef.current.style.backgroundColor !== '#fff'){
-          headerRef.current.style.backgroundColor = '#fff' 
-        }  
-      }
-      
-    }
+    
     window.addEventListener("scroll",showHeaderColor)
     return () => {
       window.removeEventListener("scroll",showHeaderColor)
@@ -85,13 +89,15 @@ const Header = memo(() => {
         <HeaderPage/>
         <HeaderSearch/>
         <HeaderLogin/> */}
+   
+      <LeftLogo/>
+      <LowerContainer ref={lowerContainerRef}/>
+      <HeaderUtils/>
+      <SearchBox/>
+      
+      <UserAvatar />
 
-        <LeftLogo/>
-        <LowerContainer ref={lowerContainerRef}/>
-        <HeaderUtils/>
-        <SearchBox/>
         
-        <UserAvatar />
     </HeaderWrapper>
   )
 })

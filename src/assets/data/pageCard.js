@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 export const array = [
   {
     title: "基于 AIDA64 和现代 web 技术的电脑性能监控页",
@@ -6,7 +7,7 @@ export const array = [
     commentCount: "19",
     publishUser: "野生技术协会",
     publishDate: "2023-10-06",
-    imgUrl: "https://2heng.xin/wp-content/uploads//2023/10/IMG_20231006_114356-1024x769.jpg",
+    imgUrl: "https://2heng.xin/wp-content/uploads/2023/10/IMG_20231006_114356-1024x769.jpg",
   },
   {
     title: "基于 SCSS mixin 的 flex gap polyfill",
@@ -15,7 +16,7 @@ export const array = [
     commentCount: "51",
     publishUser: "碎碎念",
     publishDate: "2021-07-30",
-    imgUrl: "https://2heng.xin/wp-content/uploads//2021/07/20210729_025259-1024x877.jpg",
+    imgUrl: "https://2heng.xin/wp-content/uploads/2021/07/20210729_025259-1024x877.jpg",
   },
   {
     title: "GraphQL 实现递归查询",
@@ -24,7 +25,7 @@ export const array = [
     commentCount: "53",
     publishUser: "野生技术协会",
     publishDate: "2019-12-31",
-    imgUrl: "https://2heng.xin/wp-content/uploads//2019/12/2572384-1024x640.jpg",
+    imgUrl: "https://2heng.xin/wp-content/uploads/2019/12/2572384-1024x640.jpg",
   },
   {
     title: "解决移动端浏览器 vh 单位异常问题",
@@ -33,7 +34,7 @@ export const array = [
     commentCount: "323",
     publishUser: "碎碎念",
     publishDate: "2019-09-18",
-    imgUrl: "https://2heng.xin/wp-content/uploads//2018/06/child-1024x576.jpg",
+    imgUrl: "https://2heng.xin/wp-content/uploads/2018/06/child-1024x576.jpg",
   },
   {
     title: "Docker 部署 Zabbix + Grafana",
@@ -42,34 +43,34 @@ export const array = [
     commentCount: "214",
     publishUser: "碎碎念",
     publishDate: "2019-09-10",
-    imgUrl: "https://2heng.xin/wp-content/uploads//2017/12/｡･：＊：･✿-PID65231071-by-hakusai-1024x602.jpg",
+    imgUrl: "https://2heng.xin/wp-content/uploads/2017/12/｡･：＊：･✿-PID65231071-by-hakusai-1024x602.jpg",
   },
   {
     title: "VSCode Remote SSH: Bad Owner or Permissions",
-    description:"Windows 10 自带了 OpenSSH 工具包（C:\Windows\System32\OpenSSH\），但是用私钥连接的时候老是出现 Bad o",
+    description:"Windows 10 自带了 OpenSSH 工具包(C:/Windows/System32/OpenSSH/)，但是用私钥连接的时候老是出现 Bad o",
     hotLook: "21312",
     commentCount: "231",
     publishUser: "野生技术协会",
     publishDate: "2019-09-05",
-    imgUrl: "https://2heng.xin/wp-content/uploads//2017/12/fleurir-PID66213177-by-アシマ@3日目東ラ39b-1024x725.png",
+    imgUrl: "https://2heng.xin/wp-content/uploads/2017/12/fleurir-PID66213177-by-アシマ@3日目東ラ39b-1024x725.png",
   },
   {
     title: "MDC 自动初始化",
-    description:"尝试了 material-components-web 提供的自动初始化方法 mdc-auto-init，感觉要是分别给每个 HTML 标签做标记的话比较",
+    description:"尝试了 material-components-web 提供的自动初始化方法 mdc-auto-init,感觉要是分别给每个 HTML 标签做标记的话比较",
     hotLook: "12521",
     commentCount: "1231",
     publishUser: "野生技术协会",
     publishDate: "2019-09-03",
-    imgUrl: "https://2heng.xin/wp-content/uploads//2019/11/muse-dash-1024x576.png",
+    imgUrl: "https://2heng.xin/wp-content/uploads/2019/11/muse-dash-1024x576.png",
   },
   {
     title: "修复 WordPress 5.1 评论回复按键失效问题",
-    description:"今天早上闲着无聊点了一下 WordPress 更新按键，从 5.0.3 更新到了 5.1，没想到出现了评论回复按键失效的问题，瞬间懵逼，因为电脑不方便联网",
+    description:"今天早上闲着无聊点了一下 WordPress 更新按键，从 5.0.3 更新到了 5.1,没想到出现了评论回复按键失效的问题，瞬间懵逼，因为电脑不方便联网",
     hotLook: "24214",
     commentCount: "23121", 
     publishUser: "野生技术协会",
     publishDate: "2019-02-23",
-    imgUrl: "https://2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png",
+    imgUrl: "https://2heng.xin/wp-content/uploads/2019/02/wallhaven-672007-1-1024x576.png",
   },
   {
     title: "一年",
@@ -78,6 +79,6 @@ export const array = [
     commentCount: "2412",
     publishUser: "随想",
     publishDate: "2018-06-01 ",
-    imgUrl: "https://2heng.xin/wp-content/uploads//2018/05/sakura-1024x576.jpg",
+    imgUrl: "https://2heng.xin/wp-content/uploads/2018/05/sakura-1024x576.jpg",
   }
 ]

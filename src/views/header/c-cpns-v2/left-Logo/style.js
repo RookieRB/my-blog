@@ -7,14 +7,7 @@ const LeftWrapper = styled.div`
   font-family: 'Moe-Mashiro', 'Merriweather Sans', Helvetica, Tahoma, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei', sans-serif;
   position: relative;
   margin: 25px 20px;
-  @keyframes rotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  } 
+  
  
   .left{
     padding: 2px 2px;

@@ -5,11 +5,7 @@ const SearchBoxWrapper = styled.div`
 
   margin: auto 15px;
   z-index: 99;
-  // 动画
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+ 
   .search-icon-out{
     .icon{
       &:hover{

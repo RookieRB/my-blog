@@ -6,8 +6,8 @@ const CardWrapper = styled.div`
   display: flex;
   .pageCard{
     margin: auto;
-    width: 780px;
-    height: 300px;
+    width: 850px;
+    height: 320px;
     display: flex;
     border-radius:15px;
     overflow:hidden;
@@ -138,8 +138,6 @@ const CardWrapper = styled.div`
     .rightPage{
       position:relative;
       flex:0 0 50%;
-
-
       overflow: hidden; /* 隐藏溢出的部分 */
       display: flex; /* 使用Flexbox布局 */
       justify-content: center; /* 水平居中 */

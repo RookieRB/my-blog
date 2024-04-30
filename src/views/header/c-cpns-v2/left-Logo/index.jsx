@@ -8,7 +8,7 @@ const LeftLogo = memo(() => {
     <LeftWrapper>
 
       <span className="site-title">
-        <a href="">
+        <a href="/home">
           <span className="left">
             世界が终 
           </span>

@@ -8,6 +8,7 @@ const MusicFooterRightWrapper = styled.div`
   justify-content: center;
   margin: 0 20px;
   user-select: none;
+  position:  relative;
   .music-footer-right-songStandard{
     margin-right: 4px;
     position: relative;
@@ -46,6 +47,28 @@ const MusicFooterRightWrapper = styled.div`
   }
   .music-footer-right-slider{
     width: 75px;
+  }
+  .music-footer-right-soundEffectPanel{
+    position: absolute;
+    width: 770px;
+    height: 490px;
+    left: -185%;
+    top: -650%;
+    box-shadow: 0 0 2px 2px rgba(0,0,0,.2);
+    border-radius: 5px;
+    background-color: #fff;
+    z-index: 10;
+  }
+  .music-footer-right-musicPlayList{
+    position: absolute;
+    width: 385px;
+    height: 565px;
+    top: -735%;
+    left: -32%;
+    box-shadow: 1px 0 4px 2px rgba(0,0,0,.2);
+    border-radius: 12px;
+    background-color: #fff;
+    z-index: 5;
   }
 `
 export default MusicFooterRightWrapper

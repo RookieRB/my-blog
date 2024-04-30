@@ -1,0 +1,95 @@
+const musicPlayListMockData = [
+  {
+    songName: "飞  (风浪没平息)",
+    ImgUrl: "http://p1.music.126.net/QtCi8lmVu4yRynJ3cJaxWg==/109951168390238294.jpg?param=50y50",
+    basicInfo:"王恩信Est/二胖u（王訫）",
+    favorite: 1,
+    songTime: "03:39",
+  },
+  {
+    songName: "波伏瓦(Beauvoir)-[I was made for another planet]",
+    ImgUrl: "http://p2.music.126.net/QOeedd2GOfJmQg7v1nJjOg==/109951169459534606.jpg?param=130y130",
+    basicInfo:"Fatdogboom",
+    favorite: 0,
+    songTime: "04:30",
+  },
+  {
+    songName: " Everywhere We Go",
+    ImgUrl: "http://p2.music.126.net/hDa6w1Bw7LfUPw2VSa0HAw==/18564154325374364.jpg?param=130y130",
+    basicInfo:"陈冠希 / MC仁 / 厨房仔 / 应采儿",
+    favorite: 1,
+    songTime: "04:19",
+  },
+  {
+    songName: "5:20AM",
+    ImgUrl: "http://p2.music.126.net/RjiI9yP2Fnxx5cxiTVCIrQ==/109951169318905148.jpg?param=130y130",
+    basicInfo:"刀酱",
+    favorite: 1,
+    songTime: "02:41",
+  },
+  {
+    songName: "风呀",
+    ImgUrl: "http://p2.music.126.net/An4-4Kwb-a76YuXM-vMLFA==/109951168100436929.jpg?param=130y130",
+    basicInfo:"枯木逢春",
+    favorite: 1,
+    songTime: "03:58",
+  },
+  {
+    songName: "我爱他",
+    ImgUrl: "http://p2.music.126.net/kPNB2IpuBGA4Fuxn8BEncQ==/109951164631199073.jpg?param=130y130",
+    basicInfo:"是二智呀",
+    favorite: 0,
+    songTime: "04:53",
+  },
+  {
+    songName: "把回忆拼好给你",
+    ImgUrl: "http://p2.music.126.net/CBx2K_jEN3SNWwYztagPPw==/109951164485969446.jpg?param=130y130",
+    basicInfo:"王贰浪",
+    favorite: 1,
+    songTime: "06:21",
+  },
+  {
+    songName: "烟雨行舟（原唱：伦桑）",
+    ImgUrl: "http://p2.music.126.net/HrOpexiLddSG7wKsPYq-gQ==/109951167056907210.jpg?param=130y130",
+    basicInfo:"司南",
+    favorite: 0,
+    songTime: "04:27",
+  },
+  {
+    songName: "庸人自扰之",
+    ImgUrl: "http://p2.music.126.net/4TzYcEBc_8dM4aHgUnjlQQ==/109951165000509555.jpg?param=130y130",
+    basicInfo:"花粥",
+    favorite: 1,
+    songTime: "03:10",
+  },
+  {
+    songName: "董小姐",
+    ImgUrl: "http://p1.music.126.net/GcRunGm02vZBicYmIN6GXw==/109951163200249252.jpg?param=130y130",
+    basicInfo:"宋冬野",
+    favorite: 0,
+    songTime: "05:10",
+  },
+  {
+    songName: "蝴蝶泉边",
+    ImgUrl: "http://p2.music.126.net/yyMuGVix7sQMejkZhFrwPg==/109951163077718442.jpg?param=130y130",
+    basicInfo:"黄雅莉",
+    favorite: 1,
+    songTime: "04:05",
+  },
+  {
+    songName: "光",
+    ImgUrl: "http://p2.music.126.net/VuJFMbXzpAProbJPoXLv7g==/7721870161993398.jpg?param=130y130",
+    basicInfo:"陈粒",
+    favorite: 0,
+    songTime: "02:21",
+  },
+  {
+    songName: "晴天和猫",
+    ImgUrl: "http://p2.music.126.net/0DaQ36p_mUNteubtaLvduA==/109951167547079561.jpg?param=130y130",
+    basicInfo:"花粥",
+    favorite: 1,
+    songTime: "03:08",
+  }
+]
+
+export default musicPlayListMockData

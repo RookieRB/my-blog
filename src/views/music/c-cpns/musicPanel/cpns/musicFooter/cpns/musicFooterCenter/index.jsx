@@ -83,9 +83,11 @@ const MusicFooterCenter = memo(() => {
         if(isEnter){
           favoriteRef.current.classList.remove("music-footer-utils-bottom-item-function")
           favoriteRef.current.classList.add("music-footer-utils-bottom-item-functionV2")
+          console.log(favoriteRef.current)
         }else{
           favoriteRef.current.classList.remove("music-footer-utils-bottom-item-functionV2")
           favoriteRef.current.classList.add("music-footer-utils-bottom-item-function")
+          console.log(favoriteRef.current)
         }
       }
     }
