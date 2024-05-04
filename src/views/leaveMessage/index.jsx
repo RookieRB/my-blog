@@ -15,13 +15,13 @@ const PageLeaveMessage = memo(() => {
    * 函数逻辑
    */
   // 随机生成整数
-  function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min); // 确保最小值是整数
-    max = Math.floor(max); // 确保最大值是整数
-    // Math.random() * (max - min + 1) + min 会生成一个[min, max]之间的随机数
-    // Math.floor() 确保结果是整数
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
+  // function getRandomIntInclusive(min, max) {
+  //   min = Math.ceil(min); // 确保最小值是整数
+  //   max = Math.floor(max); // 确保最大值是整数
+  //   // Math.random() * (max - min + 1) + min 会生成一个[min, max]之间的随机数
+  //   // Math.floor() 确保结果是整数
+  //   return Math.floor(Math.random() * (max - min + 1) + min);
+  // }
   function getRandomIntInclusiveV1(min, max) {
     // Math.random() * (max - min + 1) + min 会生成一个[min, max]之间的随机数
     // Math.floor() 确保结果是整数
