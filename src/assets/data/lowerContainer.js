@@ -10,6 +10,10 @@ const containerArray = [
   {
     name: "LeaveMessage",
     title: "留言"
+  },
+  {
+    name:"worksDisplay",
+    title: "展示作品"
   }
 ]
 

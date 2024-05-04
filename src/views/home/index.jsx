@@ -12,6 +12,7 @@ import HeaderTop from './c-cpns-v2/headerTop';
 import PageCardV2 from '@/components/pageCard-v2'
 import {fetchHomeDataAction} from '@/store/modules/home'
 
+
 const Home = memo(() => {
 
   /**
@@ -53,7 +54,8 @@ const Home = memo(() => {
                 <PageCardV2 infoData={item} key={index} isLeftShowImg={isLeft}/>
               )
             })
-          }
+          } 
+      
           <div className="get-more" onClick={getMorePageDataInfoHandler}>
             <span>
               Get More

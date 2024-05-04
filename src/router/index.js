@@ -21,6 +21,10 @@ import PageMusicLoadingManagement from "@/views/music/c-cpns/music-views/PageMus
 import PageMusicLocalMusic from "@/views/music/c-cpns/music-views/PageMusicLocalMusic";
 import PageMusicMyYunMusic from "@/views/music/c-cpns/music-views/PageMusicMyYunMusic";
 
+import WorkDisplay from "@/views/worksDisplay";
+import PageCut from "@/components/pageCut";
+import PageStar from "@/components/pageStar";
+
 
 const routes = [
     {
@@ -52,6 +56,20 @@ const routes = [
     {
         path:"/getPassword",
         element: <GetPassword/>
+    },
+    {
+        path: '/worksdisplay',
+        element: <WorkDisplay/>,
+        children: [
+            {
+                path: "pagecut",
+                element: <PageCut/>
+            },
+            {
+                path: "pageStar",
+                element: <PageStar/>
+            },
+        ]
     },
     {
         path:"/music",
