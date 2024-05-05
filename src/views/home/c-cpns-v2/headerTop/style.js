@@ -5,7 +5,8 @@ const TopWrapper = styled.div`
 
   position: relative;
   overflow: hidden;
-  &::before{
+  // 模糊遮荫效果
+  /* &::before{
     content: '';
     position: absolute;
     top: 0;
@@ -14,13 +15,12 @@ const TopWrapper = styled.div`
     right: 0;
     z-index: 2;
     background-attachment: fixed;
-    /* background-image: url(https://jsdelivr.2heng.xin/gh/moezx/cdn@3.1.9/img/Sakura/images/dot.gif); */
     background-image: url(${require("@/assets/imgs/dot.gif")});
-  }
+  } */
   .center-bg{
     width: 100%;
-    height: 100vh;
-    background-image: url(https://img-baofun.zhhainiao.com/fs/2991befffd35f4beab59e2b464f7d38f.jpg);
+    height: 70vh;
+    background-image: url(${require("@/assets/imgs/bg6.jpg")});
     margin: 0;
     padding: 0;
     background-repeat: no-repeat;
@@ -28,7 +28,7 @@ const TopWrapper = styled.div`
     z-index: -1;
     background-attachment: fixed;
   }
- 
+  
   .content{
     position: absolute;
     top: 40%;
@@ -36,19 +36,31 @@ const TopWrapper = styled.div`
     width: 780px;
     height: 120px;
     display: flex;
-    /* display: flex; */
-    // 毛玻璃效果
-    /* background-color: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(6.5px);
-    -webkit-backdrop-filter: blur(6.5px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
-    -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
-    border-radius: 16px;
-    -webkit-border-radius: 16px;
-    color: rgba(255, 255, 255, 0.45); */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
+    .center-text-title{
+      margin-bottom: 30px;
+      font-size: 40px;
+      color: var(--button-color)
+    }
+    .center-text-bg{
+      color: #fff;
+      font-size: 30px;
+      padding: 10px 10px;
+      background-color: rgb(0,0,0,.5);
+      border-radius: 15px;
+      .center-text{
+       
+        
+      }
+      .typed-cursor {
 
+      }
+    }
+   
+    /*抖音效果   
     .center-text{
       margin: auto;
       font-size: 80px;
@@ -60,43 +72,38 @@ const TopWrapper = styled.div`
       mix-blend-mode: lighten;
       z-index: 3;
    
-    &::before,&::after{
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      width: 100%;
-      background: rgba(0,0,0,0);
-      clip: rect(0,0,0,0);
-      box-sizing: inherit;
-    }
-    &:hover{
-      cursor: pointer;
-    }
-    &::before{
-      left: -1px;
-      text-shadow: 1px 0 #ff3f1a;
-      
-    }
-    &:hover::before{
-      text-shadow: 4px 0 #ff3f1a;
-      animation: glitch-loop-1 .8s infinite ease-in-out alternate-reverse
-    }
-    &::after{
-      left: 1px;
-      text-shadow: -1px 0 #00a7e0;
-    }
-    &:hover::after{
-      text-shadow: -5px 0 #00a7e0;
-      animation: glitch-loop-2 .8s infinite ease-in-out alternate-reverse
-    }
-      
-
-    }
-    .is-glitching{
-
-    }
-   
-    /* @keyframes huerotate {
+      &::before,&::after{
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        width: 100%;
+        background: rgba(0,0,0,0);
+        clip: rect(0,0,0,0);
+        box-sizing: inherit;
+      }
+      &:hover{
+        cursor: pointer;
+      }
+      &::before{
+        left: -1px;
+        text-shadow: 1px 0 #ff3f1a;
+        
+      }
+      &:hover::before{
+        text-shadow: 4px 0 #ff3f1a;
+        animation: glitch-loop-1 .8s infinite ease-in-out alternate-reverse
+      }
+      &::after{
+        left: 1px;
+        text-shadow: -1px 0 #00a7e0;
+      }
+      &:hover::after{
+        text-shadow: -5px 0 #00a7e0;
+        animation: glitch-loop-2 .8s infinite ease-in-out alternate-reverse
+      }
+    } */
+    // 炫光效果
+  /*@keyframes huerotate {
       100% {
           filter: hue-rotate(360deg);
       }
@@ -114,24 +121,25 @@ const TopWrapper = styled.div`
       animation: huerotate 3s infinite;
     } */
   }
+  // wave 效果
   .bannerWave{
-      position: absolute;
-      bottom: 0;
-      animation: backGroundGradient 120s linear infinite;
-      
-    }
-    .wave1{
-      height: 84px;
-      background-image: url(${require("@/assets/imgs/bannerWave1.png")});
-      width: 200%;
-      z-index: 10; 
-    }
-    .wave2{
-      height: 100px;
-      background-image: url(${require("@/assets/imgs/bannerWave2.png")});
-      width: 400%;
-      z-index: 5;
-    }
+    position: absolute;
+    bottom: 0;
+    animation: backGroundGradient 120s linear infinite;
+    
+  }
+  .wave1{
+    height: 84px;
+    background-image: url(${require("@/assets/imgs/bannerWave1.png")});
+    width: 200%;
+    z-index: 10; 
+  }
+  .wave2{
+    height: 100px;
+    background-image: url(${require("@/assets/imgs/bannerWave2.png")});
+    width: 400%;
+    z-index: 5;
+  }
 `
 
 export default TopWrapper

@@ -20,6 +20,9 @@ const LowerContainer = forwardRef((props,ref) => {
       case "LeaveMessage":
         navigate("/leaveMessage")
         break;
+      case "worksDisplay":
+        navigate("/worksdisplay")
+        break;
       default:
         break;
     }
