@@ -9,7 +9,9 @@ const MessagePanel = memo(() => {
         <img src={require("@/assets/imgs/bg5.jpg")} alt="" />
         <span className="messagePanel-top-title">留言板</span>
       </div>
-      
+      <div className="poetry-appreciation">
+        
+      </div>
     </MessagePanelWrapper>
   )
 })
