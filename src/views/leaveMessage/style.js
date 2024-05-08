@@ -6,7 +6,7 @@ const PageLeaveMessageWrapper = styled.div`
   .leaveMessage-top{ 
     height:100vh;
     z-index: -1;
-  
+   
     .leaveMessage-top-img{
       position: fixed;
       width: 100%;

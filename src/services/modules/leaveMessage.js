@@ -5,3 +5,9 @@ export function getLeaveMessageData() {
     url: '/message/getMessage',
   });
 }
+
+export function getFacialImgsUrlData(){
+  return myRequest.get({
+    url: '/message/getFaceImgsUrl'
+  });
+}

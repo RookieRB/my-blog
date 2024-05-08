@@ -1,4 +1,4 @@
-import React, { memo,Fragment } from 'react'
+import React, { memo,Fragment,useState } from 'react'
 import PropTypes from 'prop-types'
 
 
@@ -27,7 +27,21 @@ function showMessage(parentName,messageList){
 
 
 const MessagePanel = memo((props) => {
-  const {messageLeaveData} = props;
+  // 从父组件获取的数据
+  const {
+    messageLeaveData,
+    facialImgsUrlData
+  } = props;
+  // 控制表情面板显示
+  const [showEmojiPanel, setShowEmojiPanel] = useState(false)
+
+  // 点击表情按钮显示表情面板
+  function showEmojiPanelHandler(){
+    setShowEmojiPanel(!showEmojiPanel)
+
+  }
+
+  
   return (  
     <MessagePanelWrapper>
       <div className="messagePanel-top">
@@ -42,7 +56,7 @@ const MessagePanel = memo((props) => {
 
           </textarea>
           <div className="messagePanel-top-bottom">
-            <div className="messagePanel-top-bottom-emotion">
+            <div className="messagePanel-top-bottom-emotion" onClick={showEmojiPanelHandler}>
               <svg t="1714998195831" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="53008" width="20" height="20"><path d="M43.885714 526.628571c0 167.233829 86.4256 321.770057 226.742857 405.386972a441.256229 441.256229 0 0 0 453.485715 0C864.431543 848.398629 950.857143 693.8624 950.857143 526.628571c0-258.545371-203.044571-468.114286-453.485714-468.114285C246.930286 58.514286 43.885714 268.0832 43.885714 526.628571z" fill="#FFC89C" p-id="53009"></path><path d="M43.885714 482.742857C43.885714 717.034057 227.269486 906.971429 453.485714 906.971429s409.6-189.937371 409.6-424.228572S679.701943 58.514286 453.485714 58.514286 43.885714 248.451657 43.885714 482.742857z" fill="#FFFFFF" p-id="53010"></path><path d="M336.457143 643.657143c0 41.837714 16.735086 80.457143 43.885714 101.346743 27.150629 20.918857 60.6208 20.918857 87.771429 0C495.264914 724.114286 512 685.494857 512 643.657143c0-41.837714-16.735086-80.457143-43.885714-101.346743-27.150629-20.918857-60.6208-20.918857-87.771429 0C353.192229 563.2 336.457143 601.819429 336.457143 643.657143zM248.685714 307.2a73.142857 73.142857 0 1 0 146.285715 0 73.142857 73.142857 0 0 0-146.285715 0z" fill="#FF7200" p-id="53011"></path><path d="M573.352229 339.529143a70.217143 70.217143 0 0 0 34.523428 60.650057c21.357714 12.522057 47.689143 12.522057 69.046857 0a70.217143 70.217143 0 0 0 34.523429-60.650057 70.217143 70.217143 0 0 0-34.523429-60.6208 68.1984 68.1984 0 0 0-69.046857 0 70.217143 70.217143 0 0 0-34.523428 60.6208z" fill="#FF7200" p-id="53012"></path><path d="M511.707429 1008.932571C237.3632 1008.932571 14.628571 783.008914 14.628571 504.802743 14.628571 226.567314 237.392457 0.643657 511.707429 0.643657c274.285714 0 497.020343 225.923657 497.020342 504.159086 0 278.206171-222.734629 504.129829-497.0496 504.129828z m0-933.595428c-233.823086 0-423.438629 192.3072-423.438629 429.4656 0 237.129143 189.586286 429.436343 423.409371 429.436343 233.793829 0 423.409371-192.3072 423.409372-429.436343 0-237.1584-189.586286-429.494857-423.409372-429.494857z" fill="#FF7200" p-id="53013"></path></svg>
             </div>
             <div className="messagePanel-top-bottom-img">
@@ -52,6 +66,19 @@ const MessagePanel = memo((props) => {
               <button className="custom-btn btn-14">提交</button>
             </div>
           </div>
+          {
+              showEmojiPanel 
+              &&
+              <div className="messagePanel-emoji-panel">
+                {
+                  facialImgsUrlData.map((item, index) => (
+                    <div key={index} className="messagePanel-emoji-item">
+                      <img src={`http://localhost:8080/face/${item}`} alt="" /> 
+                    </div>
+                  ))
+                }
+              </div>
+            }
         </div>
       </div>
       <div className="messagePanel-content">  
@@ -81,7 +108,8 @@ const MessagePanel = memo((props) => {
   )
 })
 MessagePanel.propTypes ={
-  messageLeaveData: PropTypes.array.isRequired
+  messageLeaveData: PropTypes.array.isRequired,
+  facialImgsUrlData: PropTypes.array
 }
 
 

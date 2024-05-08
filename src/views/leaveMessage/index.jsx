@@ -55,9 +55,11 @@ const PageLeaveMessage = memo(() => {
    * 从服务器获取页面数据
    */
   const {
-    messageLeaveData
+    messageLeaveData,
+    facialImgsUrlData
   } = useSelector((state) => ({
-    messageLeaveData: state.leaveMessage.messageLeaveData
+    messageLeaveData: state.leaveMessage.messageLeaveData,
+    facialImgsUrlData: state.leaveMessage.facialImgsUrlData,
   }),shallowEqual)
 
 
@@ -111,7 +113,7 @@ const PageLeaveMessage = memo(() => {
       </div>
       <div className="content">
         <div className="messagePanel">
-          <MessagePanel messageLeaveData={messageLeaveData}/>
+          <MessagePanel messageLeaveData={messageLeaveData} facialImgsUrlData={facialImgsUrlData}/>
 
         </div>
       </div>

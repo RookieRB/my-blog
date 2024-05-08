@@ -6,6 +6,7 @@
     --primary-color : #FE9600;
     --button-color: #95f9fe;
     --lightGray-color:#ddd;
+    --font-color: #4c4948;
     --Snow4-color:#8B8989;
     --aHover-color: #49b1f5;
     --comment-color: #f7f9fe;
@@ -176,5 +177,23 @@
     100%{
         transform: translateY(0);
         background-color: transparent;
+    }
+}
+// 左右晃动
+@keyframes shake {
+    0%{
+        transform: rotate(0) scale(1);
+    }
+    25%{
+        transform: rotate(-60deg) scale(1.2);
+    }
+    50%{
+        transform: rotate(0) scale(1);
+    }
+    75%{
+        transform: rotate(60deg) scale(1.2);
+    }
+    100%{
+        transform: rotate(0) scale(1);
     }
 }

@@ -32,28 +32,60 @@ const MessagePanelWrapper = styled.div`
       width: 100%;
       align-items: center;
       margin-top: 10px;
+      svg{
+        width: 25px;
+        height: 25px;
+        &:hover{
+          animation: rotate 1s ease infinite;
+        }
+      }
       .messagePanel-top-bottom-emotion{
-        margin-right: 10px;
+        margin-right: 30px;
         cursor: pointer;
       }
       .messagePanel-top-bottom-img{
         margin-right: 10px;
         cursor: pointer;
-
       }
       .messagePanel-top-bottom-button{
         flex: 1;
         text-align: end;
-        
+        user-select:none;
+      }
+    }
+    .messagePanel-emoji-panel{
+      display: flex;
+      flex-wrap: wrap;
+      padding-top: 10px;
+      padding-left: 8px;
+      .messagePanel-emoji-item{
+        height: 30px;
+        width: 30px;
+        margin: 0  10px 8px 0;
+        padding: 5px;
+        cursor: pointer;
+       
+        &:hover{
+          background-color: rgba(0,0,0,.05);
+        }
+        img{
+          width: 100%;
+          height: 100%;
+          &:hover{
+            animation: shake 1s ease-in-out infinite;
+          }
+        }
       }
     }
    }
+ 
   }
   .messagePanel-content{
     margin-top: 30px;
     .messagePanel-content-title{
       font-size: 1.14rem;
       color: #797979;
+      user-select:none;
       span{
         padding-right: 5px;
       }

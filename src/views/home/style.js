@@ -11,9 +11,10 @@ const HomeWrapper = styled.div`
     justify-content: center;
     .content-left{
       flex: 0 0 300px;
-      .content-articleRecommend{
+      .content-item{
         margin-top: 20px;
       }
+      
     }
     .content-right{
       flex: 0 0 950px;

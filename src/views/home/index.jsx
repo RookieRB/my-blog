@@ -13,6 +13,7 @@ import PageCardV2 from '@/components/pageCard-v2'
 import {fetchHomeDataAction} from '@/store/modules/home'
 import UserInfo from './c-cpns-v2/userInfo';
 import ArticleRecommend from './c-cpns-v2/articleRecommend';
+import Announcement from './c-cpns-v2/announcement';
 
 
 const Home = memo(() => {
@@ -49,7 +50,7 @@ const Home = memo(() => {
       top: contentRef.current.offsetTop,
       behavior: 'smooth'  
     })
-  })
+  },[contentRef])
   return (
     <HomeWrapper>
         <HeaderTop jumpToPageHandler={jumpToPageHandler}/>
@@ -58,10 +59,12 @@ const Home = memo(() => {
         <div className="content" ref={contentRef}>
           <div className="content-left">
             <UserInfo/>
-            <div className="content-articleRecommend"> 
+            <div className="content-item"> 
              <ArticleRecommend recommendData={pageDataInfo.slice(0,5)}/>
             </div>
-            
+            <div className="content-item">
+              <Announcement/>
+            </div>
           </div>
           <div className="content-right">
             {
