@@ -34,7 +34,12 @@ const LowerContainer = forwardRef((props,ref) => {
           containerArray.map((item,index) => {
             return (
               <div className="item" key={index} onClick={e => gotoPageHandler(item)}>
-                <span>{item.title}</span>
+                <div className="item-icon">
+                  {item.icon}
+                </div>
+                  <span>
+                    {item.title}
+                  </span>
               </div>
             )
           })

@@ -2,20 +2,18 @@ import styled from "styled-components";
 
 
 const CardWrapper = styled.div`
-  margin-top: 40px;
-  display: flex;
+  margin-bottom: 40px;
   .pageCard{
-    margin: auto;
-    width: 850px;
-    height: 320px;
+    height: 280px;
     display: flex;
     border-radius:15px;
     overflow:hidden;
     background-color: transparent;
     box-shadow: 0 1px 20px -6px rgba(0,0,0,.5); 
+    transition: box-shadow 0.5s ease;
     &:hover{
       box-shadow: 0 1px 20px 0px rgba(0,0,0,.5);
-      transition: box-shadow 0.5s ease;
+      
       .rightPage{
         img{
           transform: translate(-50%,-50%) scale(1.3) rotate(10deg);
@@ -25,8 +23,8 @@ const CardWrapper = styled.div`
     
     .leftPage{
       flex:1;
-      padding: 40px 40px 0 20px;
-      
+      padding: 30px 40px 10px 20px;
+      box-sizing: border-box;
       .page-title{
         height: 45px;
         font-size: 1em;
@@ -43,7 +41,7 @@ const CardWrapper = styled.div`
           }
       }
       .page-description{  
-        height: 80px;
+        height: 70px;
         font-size: 1.0em;
         margin-bottom:30px; 
         display: -webkit-box;
@@ -58,7 +56,7 @@ const CardWrapper = styled.div`
         display: flex;
         font-size: 0.8em;  
         font-family:STKaiti;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
         span{
           margin-left: 5px;
         }
@@ -137,7 +135,7 @@ const CardWrapper = styled.div`
     }
     .rightPage{
       position:relative;
-      flex:0 0 50%;
+      flex:0 0 45%;
       overflow: hidden; /* 隐藏溢出的部分 */
       display: flex; /* 使用Flexbox布局 */
       justify-content: center; /* 水平居中 */
@@ -145,14 +143,12 @@ const CardWrapper = styled.div`
       img{
         width:100%;
         height:100%;
-       
         /* object-fit: cover;  */
         position:absolute;
         top:50%;
         left:50%;
         transform: translate(-50%, -50%);
-        transition: transform 0.5s ease;
-        
+        transition: transform 0.5s ease; 
       }
     }
   }

@@ -2,7 +2,7 @@ const themeV2 = {
   font:{
       color: "#000000E0",
       fontSize: "2em",
-      fontFamily: "AlibabaPuHuiTi,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji',sans-serif",
+      fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif",
       hoverColor: "#FE9600",
   },
   mixin: {

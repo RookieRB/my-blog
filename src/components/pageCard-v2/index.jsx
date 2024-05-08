@@ -12,7 +12,6 @@ const PageCardV2 = memo((props) => {
   // 是否左边显示图片
   const { isLeftShowImg = false, infoData}  = props
 
-  console.log(infoData)
   return (
     <CardWrapper>
       <div className="pageCard">

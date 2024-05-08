@@ -5,6 +5,14 @@
 :root{
     --primary-color : #FE9600;
     --button-color: #95f9fe;
+    --lightGray-color:#ddd;
+    --Snow4-color:#8B8989;
+    --aHover-color: #49b1f5;
+    --comment-color: #f7f9fe;
+    --card-box-shadow: 0 3px 8px 6px rgba(7,17,27,0.06);
+    --card-hover-box-shadow: 0 3px 8px 6px rgba(7,17,27,0.15);
+    --card-border-radius: 8px;
+    --card-padding: 25px;
     // 用于 shimmer Button
     --glow-hue: 222deg;
     --shadow-hue: 180deg;
@@ -17,6 +25,7 @@
     );
     --spring-duration: 1.33s;
 }
+
 
 // 首页字母动画
 @keyframes glitch-loop-1 {
@@ -87,17 +96,17 @@
     from { opacity: 0; }
     to { opacity: 1; }
 }
-// 文字滚动动画
+// 文字滚动动画  translateX
 @keyframes scroll-left {
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
 }
-// 文字滚动动画(字幕滚动效果)
+// 文字滚动动画(字幕滚动效果) translateX
 @keyframes scroll-left-barrage {
     0% { transform: translateX(0); }
     100% { transform: translateX(-180vw); }
 }
-// 图标变大
+// 图标变大 scale
 @keyframes toBig {
     from {
         transform: scale(1);
@@ -106,7 +115,7 @@
         transform: scale(1.05);
     }
 }
-// wave 背景图片变动
+// wave 背景图片变动  background-position
 @keyframes backGroundGradient {
     0%{
         background-position: 0 50%;
@@ -128,5 +137,44 @@
     100%{
         opacity: 1;
         transform: translateY(0);
+    }
+}
+// 跳转按钮 从上往下移动
+@keyframes jumpButton {
+    0%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    30%{
+        opacity: .5;
+        transform: translateY(20px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+// 从下往上移动
+@keyframes fromBottomToTop{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(-200px);
+    }
+}
+// 跳跃出现
+@keyframes popUp {
+    0%{
+        transform: translateY(-50px);
+        background-color: #fff;
+    }
+    100%{
+        transform: translateY(0);
+        background-color: transparent;
     }
 }

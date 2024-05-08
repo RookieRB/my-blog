@@ -1,4 +1,4 @@
-import React, { memo,useEffect } from 'react'
+import React, { memo,useEffect,useCallback,useRef } from 'react'
 import {shallowEqual, useDispatch, useSelector} from 'react-redux'
 
 // import { CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons';
@@ -11,10 +11,13 @@ import HomeWrapper from './style'
 import HeaderTop from './c-cpns-v2/headerTop';
 import PageCardV2 from '@/components/pageCard-v2'
 import {fetchHomeDataAction} from '@/store/modules/home'
+import UserInfo from './c-cpns-v2/userInfo';
+import ArticleRecommend from './c-cpns-v2/articleRecommend';
 
 
 const Home = memo(() => {
-
+  // 获取content的对象
+  const contentRef = useRef(null)
   /**
    * 从redux 中读取数据
    */
@@ -40,27 +43,45 @@ const Home = memo(() => {
   function getMorePageDataInfoHandler(){
     dispatch(fetchHomeDataAction())
   }
+  // 跳转事件
+  const jumpToPageHandler = useCallback(() => {
+    window.scrollTo({
+      top: contentRef.current.offsetTop,
+      behavior: 'smooth'  
+    })
+  })
   return (
     <HomeWrapper>
-        <HeaderTop/>
-         <Header/>
-
-        <div className="content">
-          {/* <Outlet/> */}
-          {
-            pageDataInfo?.map((item,index) => {
-              const isLeft = (index % 2 === 0) ? false : true
-              return (
-                <PageCardV2 infoData={item} key={index} isLeftShowImg={isLeft}/>
-              )
-            })
-          } 
-      
-          <div className="get-more" onClick={getMorePageDataInfoHandler}>
-            <span>
-              Get More
-            </span>
+        <HeaderTop jumpToPageHandler={jumpToPageHandler}/>
+        
+        <Header/> 
+        <div className="content" ref={contentRef}>
+          <div className="content-left">
+            <UserInfo/>
+            <div className="content-articleRecommend"> 
+             <ArticleRecommend recommendData={pageDataInfo.slice(0,5)}/>
+            </div>
+            
           </div>
+          <div className="content-right">
+            {
+              pageDataInfo?.map((item,index) => {
+                const isLeft = (index % 2 === 0) ? false : true
+                return (
+                  <PageCardV2 infoData={item} key={index} isLeftShowImg={isLeft}/>
+                )
+              })
+            } 
+            <div className="get-more" onClick={getMorePageDataInfoHandler}>
+              <span>
+                Get More
+              </span>
+            </div>
+          </div>
+          {/* <Outlet/> */}
+        
+      
+        
         </div>
 {/*       
         <FloatButton.Group

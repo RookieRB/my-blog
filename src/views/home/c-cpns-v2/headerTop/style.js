@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 
 const TopWrapper = styled.div`
-
+  width: 100%;
   position: relative;
   overflow: hidden;
   // 模糊遮荫效果
@@ -32,7 +32,7 @@ const TopWrapper = styled.div`
   .content{
     position: absolute;
     top: 40%;
-    left: 30%;
+    left: 35%;
     width: 780px;
     height: 120px;
     display: flex;
@@ -59,7 +59,7 @@ const TopWrapper = styled.div`
 
       }
     }
-   
+  
     /*抖音效果   
     .center-text{
       margin: auto;
@@ -121,6 +121,22 @@ const TopWrapper = styled.div`
       animation: huerotate 3s infinite;
     } */
   }
+  .arrow-toContent{
+      position: absolute;
+      bottom: 20px;
+      left: 47%;
+      cursor: pointer;
+      z-index: 11;
+      animation: jumpButton 1.5s ease-out infinite;  
+      svg{
+        width: 100px;
+        height: 100px;
+     
+        path{
+          fill: #fff;
+        }
+      }
+    }
   // wave 效果
   .bannerWave{
     position: absolute;
