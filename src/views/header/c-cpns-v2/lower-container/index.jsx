@@ -12,7 +12,7 @@ const LowerContainer = forwardRef((props,ref) => {
   function gotoPageHandler(item){
     switch(item.name) {
       case "HomePage":
-        navigate("/home/content")
+        navigate("/home")
         break;
       case "Music":
         navigate("/music")

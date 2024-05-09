@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 
 const ContainerWrapper = styled.div`
+
   .whole{
     display:flex;
     justify-content: end;

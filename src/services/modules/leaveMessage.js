@@ -8,6 +8,6 @@ export function getLeaveMessageData() {
 
 export function getFacialImgsUrlData(){
   return myRequest.get({
-    url: '/message/getFaceImgsUrl'
+    url: '/message/getFaceImgsNames'
   });
 }

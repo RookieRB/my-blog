@@ -17,9 +17,10 @@ const TopWrapper = styled.div`
     background-attachment: fixed;
     background-image: url(${require("@/assets/imgs/dot.gif")});
   } */
+  animation: bgMove 1s ease ;
   .center-bg{
     width: 100%;
-    height: 70vh;
+    height: 100vh;
     background-image: url(${require("@/assets/imgs/bg6.jpg")});
     margin: 0;
     padding: 0;

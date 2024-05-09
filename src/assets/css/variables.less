@@ -6,6 +6,7 @@
     --primary-color : #FE9600;
     --button-color: #95f9fe;
     --lightGray-color:#ddd;
+    --maxLightGray-color:#eee;
     --font-color: #4c4948;
     --Snow4-color:#8B8989;
     --aHover-color: #49b1f5;
@@ -197,3 +198,83 @@
         transform: rotate(0) scale(1);
     }
 }
+// 头像移动到登录面板上
+@keyframes avatarMoveToPanel{
+    0%{
+        transform: translate(0,0) scale(1);
+    }
+    100%{
+        transform: translate(-20px, 40px) scale(1.1);
+    }
+}
+// button flay
+@keyframes fly-1 {
+    from {
+        transform: translateY(0.1em);
+    }
+
+    to {
+        transform: translateY(-0.1em);
+    }
+}
+
+// 模仿风吹动
+@keyframes wind {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    0% {
+        background-position: 50% 100%;
+    }
+
+    0% {
+        background-position: 0% 50%;
+    }
+}
+// 用于glassButton
+@keyframes slay-1 {
+    0% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(10deg);
+    }
+}
+
+@keyframes slay-2 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(15deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+@keyframes slay-3 {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    50% {
+      transform: rotate(-5deg);
+    }
+  
+    100% {
+      transform: rotate(0);
+    }
+}
+
+
+
+
+    

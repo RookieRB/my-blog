@@ -8,6 +8,7 @@ import HeaderWrapper from './style'
 // import HeaderLogin from './c-cpns/header-login'
 import LeftLogo from './c-cpns-v2/left-Logo'
 import LowerContainer from './c-cpns-v2/lower-container'
+import UserAvatar from './c-cpns-v2/user-avatar'
 
 const Header = memo(() => {
   /**
@@ -32,7 +33,13 @@ const Header = memo(() => {
       </div>
       
       <div className="right-container">
-        <LowerContainer/>
+        <div className="lower-container">
+          <LowerContainer/>
+        </div>
+        <div className="user-avatar">
+          <UserAvatar/>
+        </div>
+        
       </div>    
     </HeaderWrapper>
   )

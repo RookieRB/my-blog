@@ -2,35 +2,60 @@ import styled from 'styled-components'
 
 
 const AvatarWrapper = styled.div`
-  margin: auto 15px;
   position: relative;
-  .message{
-    position:absolute;
-    background-color: #fff;
-    top: 40px;
-    left:-80px;
-    width: 120px;
-    height:60px;  
-    border-radius: 4px;
-    box-shadow: 2px 4px 10px rgba(0, 20, 0, 0.5);
-    .dialog-triangle{
-      position: absolute;
-      top: -10px; /* 根据需要调整，使三角形位于对话框外部 */
-      left: 75%; /* 居中对齐 */
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 10px solid white; /* 三角形的底部颜色与对话框背景相同 */
-      transform: translateX(-50%);
-    }
-    .content{
-      text-align: center;
-      color: 	#EE6363;
-      height:100%;
-      width: 100%;
+  &:hover{
+    cursor: pointer;
+    .user-avatar{
+      animation: avatarMoveToPanel 0.5s ease-in-out forwards;
     }
   }
+  .user-avatar{
+    margin-top: 10px;
+    overflow: hidden;
+    border-radius: 50%;
+    
+    .user-avatar-img{
+      width: 100%;
+      height:100%;
+      object-fit: cover;
+    }
+    
+  }
+  .userAvatar-panel{
+    position: absolute;
+    top: 60px;
+    left: -140px;
+    width: 140px;
+    z-index: -1;
+    box-shadow: var(--card-box-shadow);
+    border-radius: var(--card-border-radius);
+    background-color: #fff;
+    
+
+    padding: 15px 0;
+    .userLogin{
+      width: 100%;
+      padding: 10px 0;
+      text-align: center;
+      box-sizing: border-box;
+      &:hover{
+        background-color: rgba(0,0,0,0.05);
+      }
+      svg{
+        width: 18px;
+        height: 18px;
+      }
+      .userLogin-name{
+        margin-left: 5px;
+        font-size: 16px;
+        line-height:16px;
+        vertical-align: top;
+      }
+    }
+    
+  }
+  
+  
 `
 
 

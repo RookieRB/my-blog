@@ -2,9 +2,6 @@ import { Navigate } from "react-router-dom";
 
 import Home from '@/views/home'
 import LoginPage from "@/views/pageLogin";
-import HomeContent from "@/views/home/c-cpns/Home-content";
-import PageRegister from "@/views/pageLogin/pageRegister";
-import GetPassword from "@/views/pageGetPassword";
 import PageLeaveMessage from "@/views/leaveMessage";
 
 import PageMusic from "@/views/music";
@@ -29,17 +26,11 @@ import PageStar from "@/components/pageStar";
 const routes = [
     {
         path: "/",
-        element: <Navigate to="/home/content"/>
+        element: <Navigate to="/home"/>
     },
     {
         path: "/home",
         element: <Home/>,
-        children:[
-            {
-                path: "content",
-                element: <HomeContent/>
-            }
-        ]
     },
     {
         path:"/leaveMessage",
@@ -48,14 +39,6 @@ const routes = [
     {
         path: "/login",
         element: <LoginPage/>
-    },
-    {
-        path: "/register",
-        element: <PageRegister/>
-    },
-    {
-        path:"/getPassword",
-        element: <GetPassword/>
     },
     {
         path: '/worksdisplay',
