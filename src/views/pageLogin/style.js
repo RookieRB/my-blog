@@ -5,6 +5,7 @@ const LoginWrapper = styled.div`
   width: 100%;
   height: 100vh;
   position: fixed;
+ 
   .login-bgImg{
     width: 100%;
     height: 100%;
@@ -95,6 +96,12 @@ const LoginWrapper = styled.div`
     font-size: 15px;
     font-family: KaiTi;
     user-select: none;
+    .btn{
+      cursor: pointer;
+      &:hover{
+        color: var(--aHover-color);
+      }
+    }
   }
   .panel-btn{
     margin-top: 5px;

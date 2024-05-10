@@ -15,6 +15,7 @@ const Header = memo(() => {
    * 内部变量
    */
 
+
   /**
    * 函数处理
    */
@@ -37,7 +38,7 @@ const Header = memo(() => {
           <LowerContainer/>
         </div>
         <div className="user-avatar">
-          <UserAvatar/>
+          <UserAvatar />
         </div>
         
       </div>    

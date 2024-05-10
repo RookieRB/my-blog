@@ -8,10 +8,10 @@ from '@/services/modules/leaveMessage'
 
 export const fetchLeaveMessageDataAction = createAsyncThunk("messageLeaveData",(payload,{dispatch})=>{
   getLeaveMessageData().then((res)=>{
-    dispatch(changeMessageLeaveDataAction(res))
+    dispatch(changeMessageLeaveDataAction(res.data))
   })
   getFacialImgsUrlData().then((res)=>{
-    dispatch(changeFacialImgsUrlAction(res))
+    dispatch(changeFacialImgsUrlAction(res.data))
   })
 })
 

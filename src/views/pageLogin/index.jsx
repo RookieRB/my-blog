@@ -1,5 +1,8 @@
 import React, { memo,useRef} from 'react'
 import {useDispatch} from 'react-redux'
+import {toast,Bounce,ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import {useNavigate} from 'react-router-dom'
 
 import LoginWrapper from './style'
 import Header from '../header'
@@ -8,8 +11,15 @@ import GlassButton from '@/components/buttonPackage/glassButton'
 import {toLogin} from '@/services/modules/userLogin'
 import { 
   changeUserInfoData,
-  changeTokenData,
  } from '@/store/modules/currentUser'
+ 
+import { 
+  validateEmail,
+ } from '@/utils/commonUtils'
+import { getCaptcha,toRegister } from '@/services/modules/userLogin'
+
+
+
 
 
 const LoginPage = memo(() => {
@@ -66,6 +76,7 @@ const LoginPage = memo(() => {
   // 注册界面验证码input组件信息
   const registerInputCodeRef = useRef(null)
 
+  const navigate = useNavigate()
 
 
   // 去注册按钮处理逻辑
@@ -88,11 +99,14 @@ const LoginPage = memo(() => {
   }
   // 去登录按钮处理逻辑
   const toLoginButtonClickHandler = () => {
-    RegisterPanelAnimation.reverse()
-    LoginPanelAnimation.reverse()
-    OverlayAnimation.reverse()
-    OverlayToRegisterAnimation.reverse()
-    OverlayToLoginAnimation.reverse()
+    if(RegisterPanelAnimation && LoginPanelAnimation && OverlayAnimation && OverlayToRegisterAnimation && OverlayToLoginAnimation){
+      RegisterPanelAnimation.reverse()
+      LoginPanelAnimation.reverse()
+      OverlayAnimation.reverse()
+      OverlayToRegisterAnimation.reverse()
+      OverlayToLoginAnimation.reverse()
+    }
+   
   }
   const dispatch = useDispatch()
   // 登录按钮逻辑处理
@@ -101,21 +115,114 @@ const LoginPage = memo(() => {
       const userName = loginInputUserNameRef.current.value
       const password = loginInputPasswordRef.current.value
       toLogin({userName:userName,password:password}).then(res => {
-        dispatch(changeUserInfoData({userName:res.username,userImg:res.userImg}))
-        dispatch(changeTokenData(res.token))
-      },
-      err => {
-        console.log(err)
+        if(res.code === 1){
+          toast.success('登录成功', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+          dispatch(changeUserInfoData(res.data))
+          setTimeout(() => {navigate('/home')},1000)
+          
+        }else{
+          toast.error('登录失败,请检查用户名或密码', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+          });
+        }
       })
     }
       
+  }
+  // 注册按钮逻辑处理
+  const registerButtonClickHandler = () => {
+    if(registerInputUserNameRef.current.value && registerInputPasswordRef.current.value && registerInputEmailRef.current.value && registerInputCodeRef.current.value){
+      const userName = registerInputUserNameRef.current.value
+      const password = registerInputPasswordRef.current.value
+      const email = registerInputEmailRef.current.value
+      const code = registerInputCodeRef.current.value
+      toRegister({userName:userName,password:password,email:email,confirmCode:code}).then(res => {
+        if(res.code === 1){
+          toast.success('注册成功', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        }else{
+          toast.error(`注册失败,${res.msg}`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          })
+        }
+      })
+    }
+  }
+  // 验证码发送按钮逻辑处理
+  const sendCodeButtonClickHandler = () => {
+    const EmailString = registerInputEmailRef.current.value
+    if(EmailString){
+      if(validateEmail(EmailString)){
+        // 发送验证码
+        getCaptcha(EmailString).then(res => {
+          toast.success('验证码发送成功', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        })
+      }
+    }else{
+      toast.error('请输入正确的邮箱', {
+        position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+      })
+    }
   }
 
   return (
     <LoginWrapper>
       <Header/>
       <img src={require('@/assets/imgs/loginBG.png')} alt=""  className="login-bgImg" />
-
+        <ToastContainer/>
       <div className="login-container">
         <div className="login-panel form-container" ref={LoginRef}>
           <div className="panel-title login-panel-title">
@@ -124,7 +231,7 @@ const LoginPage = memo(() => {
           <input type="text" placeholder="用户名/邮箱/手机号" ref={loginInputUserNameRef} />
           <input type="password" placeholder="请输入密码" ref={loginInputPasswordRef} />
           <div className="panel-utils">
-            <a href="/#" >忘记密码?</a>
+            <div className="btn" >忘记密码?</div>
           </div>
           <div className="panel-btn" onClick={loginButtonClickHandler}>
             <FlyButton>
@@ -141,9 +248,9 @@ const LoginPage = memo(() => {
           <input type="text" placeholder="邮箱" ref={registerInputEmailRef} />
           <input type="text" placeholder="验证码" ref={registerInputCodeRef} />
           <div className="panel-utils">
-            <a href="/#">获取验证码</a>
+            <div className="btn" onClick={sendCodeButtonClickHandler}>获取验证码</div>
           </div>
-          <div className="panel-btn">
+          <div className="panel-btn" onClick={registerButtonClickHandler}>
             <FlyButton>
               注册
             </FlyButton>

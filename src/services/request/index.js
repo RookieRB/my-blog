@@ -9,7 +9,7 @@ class MyRequest{
       timeout
     })
     this.instance.interceptors.response.use((res) => {
-      return res.data.data
+      return res.data
     },(err) => {
       return err
     })

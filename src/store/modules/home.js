@@ -8,7 +8,7 @@ export const fetchHomeDataAction = createAsyncThunk("HomePageData",(payload,{dis
   const homeState = getState().home
   dispatch(changeCurrentPageAction(homeState.currentPage + 1))
   getHomePageData(homeState.currentPage).then((res) => {
-    dispatch(changePageDataInfoAction(homeState.pageDataInfo.concat(res.data)))
+    dispatch(changePageDataInfoAction(homeState.pageDataInfo.concat(res.data.data)))
     // dispatch(changeCurrentPageAction())
   })
 })

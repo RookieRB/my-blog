@@ -29,15 +29,20 @@ const AvatarWrapper = styled.div`
     z-index: -1;
     box-shadow: var(--card-box-shadow);
     border-radius: var(--card-border-radius);
-    background-color: #fff;
-    
-
+    background-color: rgba(255,255,255,0.7);
     padding: 15px 0;
+    .userLogOut{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .userLogin{
       width: 100%;
       padding: 10px 0;
       text-align: center;
       box-sizing: border-box;
+      user-select: none;
       &:hover{
         background-color: rgba(0,0,0,0.05);
       }

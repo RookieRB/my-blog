@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 const GlassButtonWrapper = styled.button`
   position: relative;
-  padding: 15px 45px;
+  padding: 10px 45px;
   background: #fec195;
-  font-size: 17px;
+  font-size: 12px;
   font-weight: 500;
   color: #181818;
   cursor: pointer;
