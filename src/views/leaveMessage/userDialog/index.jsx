@@ -13,13 +13,13 @@ const UserDialog = memo((props) => {
     <UserDialogWrapper>
       <div className="userDialog-left">
         <div className="userDialog-img">
-          <img src={itemData.userImg} alt="" />
+          <img src={itemData.imgUrl} alt="" />
         </div>
       </div>
       <div className="userDialog-right">
         <div className="userDialog-info">
           <div className="userDialog-info-top">
-            <span>{itemData.userName}</span><span>  {itemData.userLevel}</span>
+            <span>{itemData.userName}</span><span>  {itemData.level}</span>
             {
               parentName 
               &&

@@ -26,7 +26,7 @@ const messageLeaveSlice = createSlice({
     initialState: {
       messageLeaveData: [],
       facialImgsUrlData:[],
-      lastMessageId:0
+      lastMessageId:0,
     },
     reducers:{
       changeMessageLeaveDataAction(state,{payload}){
@@ -56,8 +56,8 @@ const messageLeaveSlice = createSlice({
 export const { 
   changeMessageLeaveDataAction,
   changeFacialImgsUrlAction,
-  changeLastMessageIdAction
-
+  changeLastMessageIdAction,
+  changeNewMessageAction
  }= messageLeaveSlice.actions;
 
 export default messageLeaveSlice.reducer;

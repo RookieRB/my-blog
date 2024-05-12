@@ -13,7 +13,8 @@ const AvatarWrapper = styled.div`
     margin-top: 10px;
     overflow: hidden;
     border-radius: 50%;
-    
+    width: 45px;
+    height: 45px;
     .user-avatar-img{
       width: 100%;
       height:100%;

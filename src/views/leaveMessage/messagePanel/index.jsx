@@ -2,13 +2,14 @@ import React, { memo,Fragment,useState,useRef} from 'react'
 import PropTypes from 'prop-types'
 import {toast,Bounce,ToastContainer} from 'react-toastify'
 
-
+import MessageLeaveLOGO from '@/assets/svg/message-leave/MessageLeaveLOGO'
 import {BASE_URL} from '@/services/request/config'
 import MessagePanelWrapper from './style'
-import MessageLeaveLOGO from '@/assets/svg/message-leave/MessageLeaveLOGO'
 import UserDialog from '../userDialog'
 import faceData from '@/assets/data/faceData'
 import {formattedDate,parseFaceOf} from '@/utils/commonUtils'
+import {insertLeaveMessageData} from '@/services/modules/leaveMessage'
+import TextareaPanel from '../textareaPanel'
 
 
 const MessagePanel = memo((props) => {
@@ -25,7 +26,7 @@ const MessagePanel = memo((props) => {
     facialImgsUrlData,
     userInfoData,
     lastMessageId,
-    messageIdUpdateHandler
+    messageUpdateHandler
   } = props;
   // 控制表情面板显示
   const [showEmojiPanel, setShowEmojiPanel] = useState(false)
@@ -48,8 +49,10 @@ const MessagePanel = memo((props) => {
   }
   // 提交按钮处理逻辑 发送留言
   function sendMessageHandler(){
+    
     //检查用户是否登录
-    if(localStorage.getItem('token')){
+   
+    if(Object.keys(userInfoData).length > 0){
       // 在留言板上添加留言
       // 对message中的表情内容做处理
       let messageContent = textareaRef.current.value
@@ -60,17 +63,25 @@ const MessagePanel = memo((props) => {
       const currentMessageId = lastMessageId + 1;
       const itemData = {
         messageId: currentMessageId,
-        userImg: userInfoData.userImg,
+        imgUrl: userInfoData.imgUrl,
         userName: userInfoData.userName,
-        userLevel: userInfoData.userLevel,
+        level: userInfoData.level,
         createTime,
         messageContent,
       }
-      console.log(itemData)
       // 更新lastMessageId
-      messageIdUpdateHandler(currentMessageId)
-
-
+      // 将数据写入redux中的newMessage数组中
+      
+      const newMessageData = {
+        messageId: currentMessageId,
+        likeCount: 0,
+        messageUser: userInfoData.id,
+        messageContent,
+        parentId: 0
+      }
+      insertLeaveMessageData(newMessageData)
+      messageUpdateHandler(currentMessageId)
+      
       setNewMessage([(
         <div className="messagePanel-content-item" key={currentMessageId}>
           <UserDialog itemData={itemData} ></UserDialog>
@@ -80,7 +91,6 @@ const MessagePanel = memo((props) => {
       textareaRef.current.value = ''
       // 关闭表情面板
       setShowEmojiPanel(false)
-
     }else{
       toast.error('登录了才能留言哦~', {
         position: "top-center",
@@ -103,7 +113,7 @@ const MessagePanel = memo((props) => {
       return;
     }
     return messageList.map((message,index)=>(
-      <Fragment key={message.messageID}>
+      <Fragment key={message.messageId}>
         <UserDialog itemData={message} parentName={parentName}  />
         {message.childMessages && (
           <div>
@@ -158,6 +168,10 @@ const MessagePanel = memo((props) => {
             }
         </div>
       </div>
+      <TextareaPanel userInfoData={userInfoData} 
+      messageUpdateHandler={messageUpdateHandler} 
+      lastMessageId={lastMessageId} 
+      facialImgsUrlData={facialImgsUrlData}/>
       <div className="messagePanel-content">  
         <div className="messagePanel-content-title">
           <span>Comments | </span> <span>45条留言</span>
@@ -167,10 +181,9 @@ const MessagePanel = memo((props) => {
             newMessage
           }
           {
-
             messageLeaveData?.map((item) => (
-            <div className="messagePanel-content-item" key={item.messageID}>
-              <UserDialog itemData={item}  />
+            <div className="messagePanel-content-item" key={item.messageId}>
+              <UserDialog itemData={item}/>
               {
                 item.childMessages
                 &&
@@ -180,7 +193,6 @@ const MessagePanel = memo((props) => {
                   }
                 </div>
               }
-              
             </div>
             ))
           }

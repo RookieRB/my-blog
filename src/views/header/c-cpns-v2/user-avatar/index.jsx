@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import AvatarWrapper from './style'
 import LogOutButton from '@/components/buttonPackage/logOutButton'
 import { changeUserInfoData } from '@/store/modules/currentUser'
+import {queryLoginStatus} from '@/services/modules/userLogin'
+
 
 const UserAvatar = memo(() => {
   /**
@@ -42,7 +44,6 @@ const UserAvatar = memo(() => {
     // 清空当前用户
     dispatch(changeUserInfoData({}));
     // 清空localStorage
-    localStorage.removeItem('userInfo')
     localStorage.removeItem('token')
     // 跳转到登录页面
     toast.success('退出成功', {
@@ -59,16 +60,34 @@ const UserAvatar = memo(() => {
   }
   // 查询是否之前有登录信息
   useEffect(() => {
-    if(localStorage.getItem('userInfo')){
-      const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-      dispatch(changeUserInfoData(userInfo))
+    if(Object.keys(userInfoData).length === 0){
+      if(localStorage.getItem('token')){
+        queryLoginStatus(localStorage.getItem('token')).then(res => {
+          if(res.code === 1){
+            dispatch(changeUserInfoData(res.data))
+          }else{
+            toast.warn('登录信息已失效，请重新登录', {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              transition: Bounce,
+            })
+          }
+          
+        })
+      }
     }
-  },[dispatch])
+  },[dispatch,userInfoData])
 
   return (
     <AvatarWrapper onMouseEnter={mouseEnterAvatarHandler} onMouseLeave={mouseLeaveAvatarHandler}>
       <div className="user-avatar" >
-        <img src={ Object.keys(userInfoData).length > 0? userInfoData?.userImg : require('@/assets/imgs/bg7.jpg')} alt="" className="user-avatar-img" />
+        <img src={ Object.keys(userInfoData).length > 0? userInfoData?.imgUrl : require('@/assets/imgs/bg7.jpg')} alt="" className="user-avatar-img" />
         
       </div>
       <ToastContainer/>
@@ -79,9 +98,17 @@ const UserAvatar = memo(() => {
           <div className="userAvatar-panel" >
             {
               Object.keys(userInfoData).length > 0  ?
+              (
+              <div className="personalInfo">
+                {userInfoData.userNickname}
               <div className="userLogOut" onClick={logOutHandler}>
                 <LogOutButton />
               </div>
+
+              </div>
+            
+              )
+              
               
               :(
                 <div className="userLogin" onClick={() => navigate('/login')}>

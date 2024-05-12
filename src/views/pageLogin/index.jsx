@@ -129,15 +129,7 @@ const LoginPage = memo(() => {
           });
           dispatch(changeUserInfoData(res.data))
           // 将数据存入localStorage
-          console.log(res.data)
           localStorage.setItem('token',res.data.token)
-          let userInfo = {
-            userName:res.data.username,
-            userId:res.data.id,
-            userLevel:res.data.userLevel,
-            userImg:res.data.userImg,
-          }
-          localStorage.setItem('userInfo',JSON.stringify(userInfo))
           setTimeout(() => {navigate('/home')},500)
           
         }else{
@@ -238,11 +230,14 @@ const LoginPage = memo(() => {
           <div className="panel-title login-panel-title">
             登录
           </div>
+         
           <input type="text" placeholder="用户名/邮箱/手机号" ref={loginInputUserNameRef} />
           <input type="password" placeholder="请输入密码" ref={loginInputPasswordRef} />
           <div className="panel-utils">
             <div className="btn" >忘记密码?</div>
           </div>
+      
+          
           <div className="panel-btn" onClick={loginButtonClickHandler}>
             <FlyButton>
               登录
