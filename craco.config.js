@@ -22,7 +22,8 @@ module.exports = {
     {
       rules: {
         // 禁止不必要的转移字符
-        'no-useless-escape' : 0,
+        'no-useless-escape' : "off"
+
       }
     }
   ]

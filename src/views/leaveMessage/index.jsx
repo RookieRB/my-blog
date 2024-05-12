@@ -1,4 +1,4 @@
-import React, { memo, useState,useRef,useEffect} from 'react'
+import React, { memo, useState,useRef,useEffect,useCallback} from 'react'
 import {shallowEqual,useSelector,useDispatch} from 'react-redux'
 
 
@@ -9,6 +9,7 @@ import MessagePanel from './messagePanel'
 // import Barrage from '@/components/barrage'
 import RocketSVG from '@/assets/svg/RocketSVG'
 import { fetchLeaveMessageDataAction } from '@/store/modules/leaveMessage'
+import {changeLastMessageIdAction} from '@/store/modules/leaveMessage'
 
 
 const PageLeaveMessage = memo(() => {
@@ -56,10 +57,14 @@ const PageLeaveMessage = memo(() => {
    */
   const {
     messageLeaveData,
-    facialImgsUrlData
+    facialImgsUrlData,
+    userInfoData,
+    lastMessageId,
   } = useSelector((state) => ({
     messageLeaveData: state.leaveMessage.messageLeaveData,
     facialImgsUrlData: state.leaveMessage.facialImgsUrlData,
+    userInfoData: state.currentUser.userInfoData,
+    lastMessageId: state.leaveMessage.lastMessageId,
   }),shallowEqual)
 
 
@@ -68,6 +73,10 @@ const PageLeaveMessage = memo(() => {
     dispatch(fetchLeaveMessageDataAction())
   },[dispatch])
   
+  const messageIdUpdateHandler = useCallback((messageId) => {
+    dispatch(changeLastMessageIdAction(messageId))
+  },[dispatch])
+
   return (
     <PageLeaveMessageWrapper>
       <Header/> 
@@ -113,8 +122,12 @@ const PageLeaveMessage = memo(() => {
       </div>
       <div className="content">
         <div className="messagePanel">
-          <MessagePanel messageLeaveData={messageLeaveData} facialImgsUrlData={facialImgsUrlData}/>
-
+          <MessagePanel 
+          messageLeaveData={messageLeaveData} 
+          facialImgsUrlData={facialImgsUrlData} 
+          userInfoData={userInfoData} 
+          lastMessageId={lastMessageId} 
+          messageIdUpdateHandler={messageIdUpdateHandler}/>
         </div>
       </div>
     </PageLeaveMessageWrapper>

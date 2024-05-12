@@ -1,5 +1,8 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+import DOMPurify from 'dompurify'
+
+
 
 import UserDialogWrapper from './style'
 
@@ -34,8 +37,8 @@ const UserDialog = memo((props) => {
             </div>
           </div>
         </div>
-        <div className="userDialog-content">
-          {itemData.messageContent}
+        <div className="userDialog-content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(itemData.messageContent) }}>
+          
         </div>
       </div>
 

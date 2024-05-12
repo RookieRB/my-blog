@@ -84,7 +84,6 @@ const PageLeaveMessageWrapper = styled.div`
     .messagePanel{
       margin: 0 auto;
       width: 800px;
-      height: 2000px;
     }
   }
   // 按钮样式

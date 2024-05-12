@@ -11,3 +11,9 @@ export function getFacialImgsUrlData(){
     url: '/message/getFaceImgsNames'
   });
 }
+
+export function getLastMessageIdData() {
+  return myRequest.get({
+    url: '/message/getLastId'
+  });
+}

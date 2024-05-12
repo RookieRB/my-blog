@@ -32,7 +32,7 @@ const faceData = {
 	,'[陶醉的亲亲]':'kissing_face_with_closed_eyes_emoji'
 	,'[笑泪]':'laughing_face_emoji'
 	,'[大哭]':'loudly_crying_face_emoji'
-	,'[面无表情]':'neutral_face_emoji'
+	,'[无表情]':'neutral_face_emoji'
 	,'[大怒]':'red_angry_face_emoji'
 	,'[呼]':'relieved_face_emoji-1'
 	,'[悲伤的沉思]':'sad_pensive_face_emoji'

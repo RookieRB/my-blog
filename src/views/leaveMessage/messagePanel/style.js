@@ -14,9 +14,10 @@ const MessagePanelWrapper = styled.div`
    }
    .messagePanel-top-textarea{
     width: 100%;
-    textarea{
+    .mock-textarea{
       width: 100%;
       min-height: 180px;
+      font-weight: 400;
       box-sizing: border-box;
       padding: 15px;
       resize: none;
@@ -32,6 +33,7 @@ const MessagePanelWrapper = styled.div`
       width: 100%;
       align-items: center;
       margin-top: 10px;
+      z-index: 2;
       svg{
         width: 25px;
         height: 25px;

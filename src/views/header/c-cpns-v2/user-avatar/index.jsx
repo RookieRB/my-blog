@@ -1,4 +1,4 @@
-import React, { memo,useState } from 'react'
+import React, { memo,useState,useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useSelector,shallowEqual,useDispatch} from 'react-redux'
 import {toast,Bounce,ToastContainer} from 'react-toastify'
@@ -15,6 +15,7 @@ const UserAvatar = memo(() => {
   /**
    * 局部变量
    */
+  
   const navigate = useNavigate()
   const [showPanel, setShowPanel] = useState(false)
   // 获取currentUserInfo
@@ -40,6 +41,10 @@ const UserAvatar = memo(() => {
     console.log('logOutHandler')
     // 清空当前用户
     dispatch(changeUserInfoData({}));
+    // 清空localStorage
+    localStorage.removeItem('userInfo')
+    localStorage.removeItem('token')
+    // 跳转到登录页面
     toast.success('退出成功', {
       position: "bottom-right",
       autoClose: 5000,
@@ -50,9 +55,16 @@ const UserAvatar = memo(() => {
       progress: undefined,
       theme: "colored",
       transition: Bounce,
-      });
+    });
   }
-  
+  // 查询是否之前有登录信息
+  useEffect(() => {
+    if(localStorage.getItem('userInfo')){
+      const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+      dispatch(changeUserInfoData(userInfo))
+    }
+  },[dispatch])
+
   return (
     <AvatarWrapper onMouseEnter={mouseEnterAvatarHandler} onMouseLeave={mouseLeaveAvatarHandler}>
       <div className="user-avatar" >

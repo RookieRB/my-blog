@@ -1,6 +1,8 @@
 import React, { memo } from 'react'
 import { GithubOutlined,WechatOutlined,QqOutlined,WeiboCircleOutlined } from '@ant-design/icons'
-import { useSelector,shallowEqual } from 'react-redux'
+// import { useSelector,shallowEqual } from 'react-redux'
+
+
 
 import UserInfoWrapper from './style'
 import CircleButton from '@/components/buttonPackage/circleButton'
@@ -8,12 +10,12 @@ import CircleButton from '@/components/buttonPackage/circleButton'
 
 
 const UserInfo = memo(() => {
-   // 获取当前用户信息currentUserInfo
-   const {
-    userInfoData
-  } = useSelector(state => ({
-    userInfoData: state.currentUser.userInfoData
-  }),shallowEqual) 
+  //  // 获取当前用户信息currentUserInfo
+  //  const {
+  //   userInfoData
+  // } = useSelector(state => ({
+  //   userInfoData: state.currentUser.userInfoData
+  // }),shallowEqual) 
 
   return (
     <UserInfoWrapper>

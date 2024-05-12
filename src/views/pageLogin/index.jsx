@@ -128,7 +128,17 @@ const LoginPage = memo(() => {
             transition: Bounce,
           });
           dispatch(changeUserInfoData(res.data))
-          setTimeout(() => {navigate('/home')},1000)
+          // 将数据存入localStorage
+          console.log(res.data)
+          localStorage.setItem('token',res.data.token)
+          let userInfo = {
+            userName:res.data.username,
+            userId:res.data.id,
+            userLevel:res.data.userLevel,
+            userImg:res.data.userImg,
+          }
+          localStorage.setItem('userInfo',JSON.stringify(userInfo))
+          setTimeout(() => {navigate('/home')},500)
           
         }else{
           toast.error('登录失败,请检查用户名或密码', {

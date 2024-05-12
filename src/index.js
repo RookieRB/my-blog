@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 import {ConfigProvider} from 'antd'
 import { Provider } from 'react-redux'
-import 'react-toastify/dist/ReactToastify.css'
+
 
 
 import App from './App';

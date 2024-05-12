@@ -1,49 +1,121 @@
-import React, { memo,Fragment,useState } from 'react'
+import React, { memo,Fragment,useState,useRef} from 'react'
 import PropTypes from 'prop-types'
+import {toast,Bounce,ToastContainer} from 'react-toastify'
 
 
-
+import {BASE_URL} from '@/services/request/config'
 import MessagePanelWrapper from './style'
 import MessageLeaveLOGO from '@/assets/svg/message-leave/MessageLeaveLOGO'
 import UserDialog from '../userDialog'
-
-
-// 遍历展示留言信息
-function showMessage(parentName,messageList){
-  if(!messageList){
-    return;
-  }
-  return messageList.map((message,index)=>(
-    <Fragment key={message.messageID}>
-      <UserDialog itemData={message} parentName={parentName}  />
-      {message.childMessages && (
-        <div>
-          {showMessage(message.userName, message.childMessages)}
-        </div>
-      )}
-    </Fragment>
-  ));
-}
+import faceData from '@/assets/data/faceData'
+import {formattedDate,parseFaceOf} from '@/utils/commonUtils'
 
 
 const MessagePanel = memo((props) => {
+  // 获取textarea
+  const textareaRef = useRef(null);
+
+  // 获取留言板
+  const messagePanelRef = useRef(null);
+
+  const [newMessage,setNewMessage] = useState('')
   // 从父组件获取的数据
   const {
     messageLeaveData,
-    facialImgsUrlData
+    facialImgsUrlData,
+    userInfoData,
+    lastMessageId,
+    messageIdUpdateHandler
   } = props;
   // 控制表情面板显示
   const [showEmojiPanel, setShowEmojiPanel] = useState(false)
+  
+  
+ 
 
   // 点击表情按钮显示表情面板
   function showEmojiPanelHandler(){
     setShowEmojiPanel(!showEmojiPanel)
+    textareaRef.current.focus()
+  }
+  // 点击表情将其显示在textarea中
+  const extension = '.png'
+  function emojiClickHandler(emoji){
+    if(textareaRef.current){
+      const index = Object.values(faceData).findIndex( arr => arr.includes(emoji.substring(0, emoji.lastIndexOf(extension))));
+      textareaRef.current.value += Object.keys(faceData)[index]
+    }
+  }
+  // 提交按钮处理逻辑 发送留言
+  function sendMessageHandler(){
+    //检查用户是否登录
+    if(localStorage.getItem('token')){
+      // 在留言板上添加留言
+      // 对message中的表情内容做处理
+      let messageContent = textareaRef.current.value
+      messageContent = parseFaceOf(messageContent)
+      // 处理时间
+      const createTime = formattedDate();
+      //  当前 messageId
+      const currentMessageId = lastMessageId + 1;
+      const itemData = {
+        messageId: currentMessageId,
+        userImg: userInfoData.userImg,
+        userName: userInfoData.userName,
+        userLevel: userInfoData.userLevel,
+        createTime,
+        messageContent,
+      }
+      console.log(itemData)
+      // 更新lastMessageId
+      messageIdUpdateHandler(currentMessageId)
 
+
+      setNewMessage([(
+        <div className="messagePanel-content-item" key={currentMessageId}>
+          <UserDialog itemData={itemData} ></UserDialog>
+        </div>
+      ),...newMessage]) 
+      // 清空留言板
+      textareaRef.current.value = ''
+      // 关闭表情面板
+      setShowEmojiPanel(false)
+
+    }else{
+      toast.error('登录了才能留言哦~', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
   }
 
-  
+
+  // 遍历展示留言信息
+  function showMessage(parentName,messageList){
+    if(!messageList){
+      return;
+    }
+    return messageList.map((message,index)=>(
+      <Fragment key={message.messageID}>
+        <UserDialog itemData={message} parentName={parentName}  />
+        {message.childMessages && (
+          <div>
+            {showMessage(message.userName, message.childMessages)}
+          </div>
+        )}
+      </Fragment>
+    ));
+  }
   return (  
     <MessagePanelWrapper>
+      <ToastContainer/>
       <div className="messagePanel-top">
         <div className="messagePanel-top-title">
             <MessageLeaveLOGO/>
@@ -52,8 +124,12 @@ const MessagePanel = memo((props) => {
             </span>
         </div>
         <div className="messagePanel-top-textarea">
-          <textarea placeholder="写下点什么...">
-
+          <textarea
+          ref={textareaRef} 
+          className="mock-textarea"
+          placeholder="写下点什么...."
+          >
+          
           </textarea>
           <div className="messagePanel-top-bottom">
             <div className="messagePanel-top-bottom-emotion" onClick={showEmojiPanelHandler}>
@@ -63,7 +139,7 @@ const MessagePanel = memo((props) => {
             <svg t="1714998271919" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="54035" width="20" height="20"><path d="M917.09952 84.6848H114.41152c-32.83968 0-59.45856 26.624-59.45856 59.45856v772.96128c0 32.83456 26.624 59.45344 59.45856 59.45344h802.688c32.83456 0 59.45344-26.61888 59.45344-59.45344V144.13824c0-32.82944-26.61888-59.45344-59.45344-59.45344z" fill="" p-id="54036"></path><path d="M917.09952 54.95296H114.41152c-32.83968 0-59.45856 26.624-59.45856 59.45856V887.35232c0 32.8448 26.624 59.46368 59.45856 59.46368h802.688c32.83456 0 59.45344-26.61888 59.45344-59.46368V114.41152c0-32.83456-26.61888-59.45856-59.45344-59.45856z" fill="#ECEAE0" p-id="54037"></path><path d="M872.50432 114.41152H159.00672a44.5952 44.5952 0 0 0-44.5952 44.5952V590.07488h802.688V159.00672a44.5952 44.5952 0 0 0-44.5952-44.5952z" fill="#98DCF0" p-id="54038"></path><path d="M613.63712 411.55584l-154.94144 178.51904h309.86752z" fill="#699B54" p-id="54039"></path><path d="M586.82368 590.07488l-206.53568-237.9776-206.5408 237.9776H114.41152V694.12352a44.5952 44.5952 0 0 0 44.5952 44.5952h713.4976a44.5952 44.5952 0 0 0 44.5952-44.5952v-104.05376h-330.27584z" fill="#80BB67" p-id="54040"></path><path d="M768.44544 263.05536m-59.45856 0a59.45856 59.45856 0 1 0 118.91712 0 59.45856 59.45856 0 1 0-118.91712 0Z" fill="#FFE68E" p-id="54041"></path></svg>
             </div>
             <div className="messagePanel-top-bottom-button">
-              <button className="custom-btn btn-14">提交</button>
+              <button className="custom-btn btn-14" onClick={sendMessageHandler}>提交</button>
             </div>
           </div>
           {
@@ -71,9 +147,10 @@ const MessagePanel = memo((props) => {
               &&
               <div className="messagePanel-emoji-panel">
                 {
-                  facialImgsUrlData.map((item, index) => (
-                    <div key={index} className="messagePanel-emoji-item">
-                      <img src={`http://localhost:8080/face/${item}`} alt="" /> 
+                  facialImgsUrlData.map((item, index) => 
+                  (
+                    <div key={index} className="messagePanel-emoji-item" onClick={e => emojiClickHandler(item)}>
+                      <img src={`http://${BASE_URL}/face/${item}`} alt="" /> 
                     </div>
                   ))
                 }
@@ -85,23 +162,29 @@ const MessagePanel = memo((props) => {
         <div className="messagePanel-content-title">
           <span>Comments | </span> <span>45条留言</span>
         </div>
-        {
-          messageLeaveData?.map((item, index) => (
-          <div className="messagePanel-content-item">
-            <UserDialog itemData={item} key={item.messageID} />
-            {
-              item.childMessages
-              &&
-              <div className="messagePanel-content-item-reply">
-                {
-                  showMessage(null,item.childMessages)
-                }
-              </div>
-            }
-            
-          </div>
-          ))
-        }
+        <div ref={messagePanelRef}>
+          {
+            newMessage
+          }
+          {
+
+            messageLeaveData?.map((item) => (
+            <div className="messagePanel-content-item" key={item.messageID}>
+              <UserDialog itemData={item}  />
+              {
+                item.childMessages
+                &&
+                <div className="messagePanel-content-item-reply">
+                  {
+                    showMessage(null,item.childMessages)
+                  }
+                </div>
+              }
+              
+            </div>
+            ))
+          }
+        </div>
       </div>
      
     </MessagePanelWrapper>
@@ -109,7 +192,9 @@ const MessagePanel = memo((props) => {
 })
 MessagePanel.propTypes ={
   messageLeaveData: PropTypes.array.isRequired,
-  facialImgsUrlData: PropTypes.array
+  facialImgsUrlData: PropTypes.array,
+  userInfoData: PropTypes.object,
+  lastMessageId: PropTypes.number,
 }
 
 

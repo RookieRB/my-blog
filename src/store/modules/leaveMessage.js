@@ -2,7 +2,8 @@ import { createSlice,createAsyncThunk } from '@reduxjs/toolkit';
 
 import {
   getLeaveMessageData,
-  getFacialImgsUrlData
+  getFacialImgsUrlData,
+  getLastMessageIdData
 }
 from '@/services/modules/leaveMessage'
 
@@ -13,6 +14,9 @@ export const fetchLeaveMessageDataAction = createAsyncThunk("messageLeaveData",(
   getFacialImgsUrlData().then((res)=>{
     dispatch(changeFacialImgsUrlAction(res.data))
   })
+  getLastMessageIdData().then((res) => {
+    dispatch(changeLastMessageIdAction(res.data))
+  })
 })
 
 
@@ -22,6 +26,7 @@ const messageLeaveSlice = createSlice({
     initialState: {
       messageLeaveData: [],
       facialImgsUrlData:[],
+      lastMessageId:0
     },
     reducers:{
       changeMessageLeaveDataAction(state,{payload}){
@@ -29,6 +34,9 @@ const messageLeaveSlice = createSlice({
       },
       changeFacialImgsUrlAction(state,{payload}){
         state.facialImgsUrlData = payload;
+      },
+      changeLastMessageIdAction(state,{payload}){
+        state.lastMessageId = payload;
       }
     },
     extraReducers: builder => {
@@ -47,7 +55,8 @@ const messageLeaveSlice = createSlice({
 
 export const { 
   changeMessageLeaveDataAction,
-  changeFacialImgsUrlAction
+  changeFacialImgsUrlAction,
+  changeLastMessageIdAction
 
  }= messageLeaveSlice.actions;
 
