@@ -1,6 +1,6 @@
-import React, { memo,Fragment,useState,useRef} from 'react'
+import React, { memo,useState,useRef} from 'react'
 import {toast,Bounce,ToastContainer} from 'react-toastify'
-
+import PropTypes from 'prop-types'
 
 import TextareaPanelWrapper from './style'
 import MessageLeaveLOGO from '@/assets/svg/message-leave/MessageLeaveLOGO'
@@ -20,18 +20,17 @@ const TextareaPanel = memo((props) => {
 
   // 从父组件获取的数据
   const {
-    messageLeaveData,
     facialImgsUrlData,
     userInfoData,
     lastMessageId,
-    messageUpdateHandler
+    messageIdUpdateHandler,
+    newMessageUpdateHandler,
+    replyInfo
   } = props;
 
    // 获取textarea
    const textareaRef = useRef(null);
 
-   
-  const [newMessage,setNewMessage] = useState('')
   // 控制表情面板显示
   const [showEmojiPanel, setShowEmojiPanel] = useState(false)
 
@@ -53,11 +52,24 @@ const TextareaPanel = memo((props) => {
   function sendMessageHandler(){
     
     //检查用户是否登录
-   
     if(Object.keys(userInfoData).length > 0){
       // 在留言板上添加留言
       // 对message中的表情内容做处理
       let messageContent = textareaRef.current.value
+      if(messageContent === '' || messageContent === null){
+        toast.error('必须要输入内容才能发送哦!~', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+        return;
+      }
       messageContent = parseFaceOf(messageContent)
       // 处理时间
       const createTime = formattedDate();
@@ -73,22 +85,28 @@ const TextareaPanel = memo((props) => {
       }
       // 更新lastMessageId
       // 将数据写入redux中的newMessage数组中
-      
       const newMessageData = {
         messageId: currentMessageId,
         likeCount: 0,
         messageUser: userInfoData.id,
         messageContent,
-        parentId: 0
+        parentId: replyInfo.parentId
       }
       insertLeaveMessageData(newMessageData)
-      messageUpdateHandler(currentMessageId)
+      // 更新当前留言的id
+      messageIdUpdateHandler(currentMessageId)
+      // 当parentId为0时，代表是根留言，需要更新父留言的回复数
+      if(replyInfo.parentId === 0){
+        // 传入值用于更新留言列表
+        newMessageUpdateHandler((
+          <div className="messagePanel-content-item" key={currentMessageId}>
+            <UserDialog itemData={itemData} ></UserDialog>
+          </div>
+        ))
+      }else{
+        // 当parentId不为0时，代表是子留言，不需要更新父留言的回复数
+      }
       
-      setNewMessage([(
-        <div className="messagePanel-content-item" key={currentMessageId}>
-          <UserDialog itemData={itemData} ></UserDialog>
-        </div>
-      ),...newMessage]) 
       // 清空留言板
       textareaRef.current.value = ''
       // 关闭表情面板
@@ -142,7 +160,7 @@ const TextareaPanel = memo((props) => {
             &&
             <div className="messagePanel-emoji-panel">
               {
-                facialImgsUrlData.map((item, index) => 
+                facialImgsUrlData?.map((item, index) => 
                 (
                   <div key={index} className="messagePanel-emoji-item" onClick={e => emojiClickHandler(item)}>
                     <img src={`http://${BASE_URL}/face/${item}`} alt="" /> 
@@ -155,5 +173,12 @@ const TextareaPanel = memo((props) => {
     </TextareaPanelWrapper>
   )
 })
+
+TextareaPanel.propTypes = {
+  facialImgsUrlData: PropTypes.array,
+  userInfoData: PropTypes.object,
+  lastMessageId: PropTypes.number,
+  replyInfo: PropTypes.object
+}
 
 export default TextareaPanel

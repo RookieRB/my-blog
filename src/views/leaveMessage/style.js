@@ -77,13 +77,14 @@ const PageLeaveMessageWrapper = styled.div`
   }
   .content{
     position: absolute;
-    display: flex;
+    display:flex;
     top: 100vh;
     width: 100%;
     background-color: #fff;
     .messagePanel{
       margin: 0 auto;
       width: 800px;
+      margin-top: 30px;
     }
   }
   // 按钮样式
@@ -172,6 +173,43 @@ const PageLeaveMessageWrapper = styled.div`
       top:inherit;
       left:0;
       bottom:0;
+    }
+  }
+  .messagePanel-replyPanel-bg{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display:flex;
+    
+    .messagePanel-replyPanel{
+      position: relative;
+      margin: auto auto;
+      width: 800px;
+      background-color: #fff;
+      box-sizing: border-box;
+      padding:20px;
+      .messagePanel-replyPanel-close{
+        position: absolute;
+        top:10px;
+        right: 10px;
+        cursor: pointer;
+        &:hover{
+          svg{
+            path{
+              fill: red;
+            }
+          }
+        }
+        svg{
+          width: 30px;
+          height: 30px;
+        }
+      }
     }
   }
 `

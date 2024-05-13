@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const TextareaPanelWrapper = styled.div`
-.messagePanel-top-title{
+  .messagePanel-top-title{
     display: flex;
     align-items: top;
     margin: 20px 0;

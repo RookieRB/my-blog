@@ -1,14 +1,30 @@
-import React, { memo } from 'react'
+import React, { memo,useContext } from 'react'
 import PropTypes from 'prop-types'
 import DOMPurify from 'dompurify'
 
 
 
 import UserDialogWrapper from './style'
+import { ThemeContext } from '../index'
+
 
 const UserDialog = memo((props) => {
-
   const { itemData, parentName } = props
+  // 用于打开留言回复面板的
+  const {updateIsShowLeaveMessage} = useContext(ThemeContext)
+
+  // 回复按钮点击处理逻辑
+  function userDialogReplyHandler(){
+    const replyInfo = {
+      parentId:itemData.messageId,
+      parentName:itemData.userName,
+    }
+    // 打开textareaPanel组件
+    updateIsShowLeaveMessage(true,replyInfo)
+  }
+
+
+ 
   return (
     <UserDialogWrapper>
       <div className="userDialog-left">
@@ -33,7 +49,7 @@ const UserDialog = memo((props) => {
           <div className="userDialog-info-bottom">
             <span>发布于 {itemData.createTime}</span>
             <div className="userDialog-info-bottom-button">
-              <button className="custom-btn btn-5">回复</button>
+              <button className="custom-btn btn-5" onClick={userDialogReplyHandler}>回复</button>
             </div>
           </div>
         </div>

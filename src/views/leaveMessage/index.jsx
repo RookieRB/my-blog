@@ -1,4 +1,4 @@
-import React, { memo, useState,useRef,useEffect,useCallback} from 'react'
+import React, { memo, useState,useRef,useEffect,useCallback,createContext} from 'react'
 import {shallowEqual,useSelector,useDispatch} from 'react-redux'
 
 
@@ -8,14 +8,18 @@ import Header from '../header'
 import MessagePanel from './messagePanel'
 // import Barrage from '@/components/barrage'
 import RocketSVG from '@/assets/svg/RocketSVG'
+// 页面上从数据库中获取留言信息
 import { fetchLeaveMessageDataAction } from '@/store/modules/leaveMessage'
+// 用于更新最后一个留言的id信息
 import {
   changeLastMessageIdAction
-
 } from '@/store/modules/leaveMessage'
-
-
-
+// 留言输入框
+import TextareaPanel from './textareaPanel'
+// 关闭按钮 
+import CloseSVG from '@/assets/svg/CloseSVG'
+// 创建上下文,便于输入框获取信息,以及留言面板获取最新留言信息
+export const ThemeContext = createContext(null)
 
 const PageLeaveMessage = memo(() => {
   // 内部变量，控制按钮出现
@@ -23,7 +27,18 @@ const PageLeaveMessage = memo(() => {
   // 控制火箭的出现
   const [rocketIsShow,setRocketIsShow] = useState(false)
   const inputRef = useRef()
+  // 控制留言框显示与隐藏
+  const [showLeaveMessage,setShowLeaveMessage] = useState(false)
+  // 哪个回复了
+  const [replyInfo,setReplyInfo] = useState(0)
+  // 更新留言框的状态
+  const updateIsShowLeaveMessage = useCallback((open,replyInfo) => {
+    setShowLeaveMessage(open)
+    setReplyInfo(replyInfo)
+  },[])
 
+  // 页面上最新添加的留言信息
+  const [newMessage,setNewMessage] = useState('')
   /**
    * 函数逻辑
    */
@@ -71,14 +86,12 @@ const PageLeaveMessage = memo(() => {
     facialImgsUrlData: state.leaveMessage.facialImgsUrlData,
     userInfoData: state.currentUser.userInfoData,
     lastMessageId: state.leaveMessage.lastMessageId,
-
   }),shallowEqual)
 
 
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchLeaveMessageDataAction())
-
   return () => {
 
   }
@@ -86,67 +99,97 @@ const PageLeaveMessage = memo(() => {
 
   },[dispatch])
   
-  const messageUpdateHandler = useCallback((messageId) => {
+  const messageIdUpdateHandler = useCallback((messageId) => {
     dispatch(changeLastMessageIdAction(messageId))
   },[dispatch])
-
-
+  
+  // 用于更新最新添加的留言信息
+  const newMessageUpdateHandler = useCallback((message) => {
+    setNewMessage([message,...newMessage])
+  },[newMessage])
 
 
   return (
-    <PageLeaveMessageWrapper>
-      <Header/> 
-      <div className="leaveMessage-top">
-        <img src={require("@/assets/imgs/bg12.jpg")} alt="" className='leaveMessage-top-img'/>
-        <div className='leaveMessage-message-in'>
-          <h2 className='leaveMessage-message-in-title'>梧桐</h2>
-          <div className='leaveMessage-message-in-emit '>
-            <input type="text" placeholder='留下点什么' className='leaveMessage-message-input leaveMessage-message-in-common' ref={inputRef} onFocus={inputFocusHandler}/>
-            {
-              buttonIsShow
-              &&
-              (
-                <button className='leaveMessage-message-button leaveMessage-message-in-common' onClick={buttonClickHandler}>发射</button>
-              )
-            }
-            {
-              rocketIsShow
-              &&
-              (
-                <div className="leaveMessage-message-rocket" onAnimationEnd={rocketAnimationEndHandler} >
-                  <RocketSVG/>
+    <ThemeContext.Provider value={{updateIsShowLeaveMessage}}>
+      <PageLeaveMessageWrapper>
+        <Header/> 
+        <div className="leaveMessage-top">
+          <img src={require("@/assets/imgs/bg12.jpg")} alt="" className='leaveMessage-top-img'/>
+          <div className='leaveMessage-message-in'>
+            <h2 className='leaveMessage-message-in-title'>梧桐</h2>
+            <div className='leaveMessage-message-in-emit '>
+              <input type="text" placeholder='留下点什么' className='leaveMessage-message-input leaveMessage-message-in-common' ref={inputRef} onFocus={inputFocusHandler}/>
+              {
+                buttonIsShow
+                &&
+                (
+                  <button className='leaveMessage-message-button leaveMessage-message-in-common' onClick={buttonClickHandler}>发射</button>
+                )
+              }
+              {
+                rocketIsShow
+                &&
+                (
+                  <div className="leaveMessage-message-rocket" onAnimationEnd={rocketAnimationEndHandler} >
+                    <RocketSVG/>
+                  </div>
+                )
+                
+              }
+            </div>
+          </div>
+          <div className="leaveMessage-barrage">
+            {/* { 
+              Array.from({ length: 20 }, (_, i) => (
+                <div className='barrage-line'>
+                  {Array.from({ length: 10 }, (_, i) => (
+                    <Barrage key={`barrage-${i}`} right={getRandomIntInclusiveV1(-20,-80) + "%"} speed={getRandomIntInclusiveV1(15,20) + "s"}/>
+                  ))}
+                  
                 </div>
-              )
-              
-            }
+              ))
+            } */}
+          
+            
           </div>
         </div>
-        <div className="leaveMessage-barrage">
-          {/* { 
-            Array.from({ length: 20 }, (_, i) => (
-              <div className='barrage-line'>
-                 {Array.from({ length: 10 }, (_, i) => (
-                  <Barrage key={`barrage-${i}`} right={getRandomIntInclusiveV1(-20,-80) + "%"} speed={getRandomIntInclusiveV1(15,20) + "s"}/>
-                 ))}
-                
+        <div className="content">
+          <div className="messagePanel">
+            <MessagePanel 
+            messageLeaveData={messageLeaveData} 
+            facialImgsUrlData={facialImgsUrlData} 
+            userInfoData={userInfoData} 
+            lastMessageId={lastMessageId} 
+            messageIdUpdateHandler={messageIdUpdateHandler}
+            newMessageUpdateHandler={newMessageUpdateHandler}
+            newMessage={newMessage}
+        />
+          </div>
+        </div>
+        {
+          showLeaveMessage
+          &&
+          (
+          <div className="messagePanel-replyPanel-bg">
+            <div className="messagePanel-replyPanel">
+              <div className="messagePanel-replyPanel-close" onClick={() => updateIsShowLeaveMessage(false)}>
+                <CloseSVG/>
               </div>
-            ))
-          } */}
-        
-          
-        </div>
-      </div>
-      <div className="content">
-        <div className="messagePanel">
-          <MessagePanel 
-          messageLeaveData={messageLeaveData} 
-          facialImgsUrlData={facialImgsUrlData} 
-          userInfoData={userInfoData} 
-          lastMessageId={lastMessageId} 
-          messageUpdateHandler={messageUpdateHandler}/>
-        </div>
-      </div>
-    </PageLeaveMessageWrapper>
+              <TextareaPanel 
+                userInfoData={userInfoData} 
+                messageIdUpdateHandler={messageIdUpdateHandler} 
+                lastMessageId={lastMessageId} 
+                facialImgsUrlData={facialImgsUrlData}
+                newMessageUpdateHandler={newMessageUpdateHandler}
+                replyInfo={replyInfo}
+              />
+            </div>
+          </div>
+            
+          )
+          }
+      </PageLeaveMessageWrapper>
+    </ThemeContext.Provider>
   )
 })
 
