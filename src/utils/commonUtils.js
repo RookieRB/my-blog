@@ -42,3 +42,26 @@ export function formattedDate(){
   const formattedDate = `${year}-${month}-${day} ${hour}:${minute}`;  
   return formattedDate;
 }
+
+
+// 更新留言中的子留言
+export function updateSubMessage(messageDataArray, id, subMessage) {
+  return messageDataArray.map(messageData => {
+    if (messageData.messageId === id) {
+      const newChildMessages = Array.isArray(messageData.childMessages) ? [...messageData.childMessages, subMessage] : [subMessage];
+      return {...messageData, childMessages: newChildMessages};
+    }
+
+    if (Array.isArray(messageData.childMessages)) {
+      return {
+        ...messageData,
+        childMessages: updateSubMessage(messageData.childMessages, id, subMessage)
+      };
+    }
+
+    return messageData;
+  });
+}
+
+
+

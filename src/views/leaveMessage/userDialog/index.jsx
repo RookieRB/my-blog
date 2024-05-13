@@ -7,7 +7,6 @@ import DOMPurify from 'dompurify'
 import UserDialogWrapper from './style'
 import { ThemeContext } from '../index'
 
-
 const UserDialog = memo((props) => {
   const { itemData, parentName } = props
   // 用于打开留言回复面板的
@@ -17,7 +16,7 @@ const UserDialog = memo((props) => {
   function userDialogReplyHandler(){
     const replyInfo = {
       parentId:itemData.messageId,
-      parentName:itemData.userName,
+      parentName:itemData.userNickname,
     }
     // 打开textareaPanel组件
     updateIsShowLeaveMessage(true,replyInfo)
@@ -35,7 +34,7 @@ const UserDialog = memo((props) => {
       <div className="userDialog-right">
         <div className="userDialog-info">
           <div className="userDialog-info-top">
-            <span>{itemData.userName}</span><span>  {itemData.level}</span>
+            <span>{itemData.userNickname}</span><span>  {itemData.level}</span>
             {
               parentName 
               &&

@@ -19,8 +19,6 @@ const MessagePanel = memo((props) => {
     userInfoData,
     lastMessageId,
     messageIdUpdateHandler,
-    newMessageUpdateHandler,
-    newMessage
   } = props;
  
 
@@ -34,13 +32,16 @@ const MessagePanel = memo((props) => {
         <UserDialog itemData={message} parentName={parentName} />
         {message.childMessages && (
           <div>
-            {showMessage(message.userName, message.childMessages)}
+            {showMessage(message.userNickname, message.childMessages)}
           </div>
         )}
       </Fragment>
     ));
   }
- 
+  
+  
+
+
   return (  
     
     <MessagePanelWrapper>
@@ -50,18 +51,16 @@ const MessagePanel = memo((props) => {
         messageIdUpdateHandler={messageIdUpdateHandler} 
         lastMessageId={lastMessageId} 
         facialImgsUrlData={facialImgsUrlData}
-        newMessageUpdateHandler={newMessageUpdateHandler}
         replyInfo={{parentId:0}}
+        messageLeaveData={messageLeaveData}
       />
         <div className="messagePanel-content-title">
           <span>Comments | </span> <span>45条留言</span>
         </div>
         <div>
+        
           {
-            newMessage
-          }
-          {
-            messageLeaveData?.map((item) => (
+            [...messageLeaveData].reverse().map((item) => (
             <div className="messagePanel-content-item" key={item.messageId}>
               <UserDialog itemData={item}/>
               {

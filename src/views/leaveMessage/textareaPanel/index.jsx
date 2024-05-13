@@ -1,15 +1,16 @@
-import React, { memo,useState,useRef} from 'react'
+import React, { memo,useState,useRef,useContext} from 'react'
 import {toast,Bounce,ToastContainer} from 'react-toastify'
 import PropTypes from 'prop-types'
+import { ThemeContext } from '..'
+
 
 import TextareaPanelWrapper from './style'
 import MessageLeaveLOGO from '@/assets/svg/message-leave/MessageLeaveLOGO'
 import {BASE_URL} from '@/services/request/config'
-import UserDialog from '../userDialog'
 import faceData from '@/assets/data/faceData'
-import {formattedDate,parseFaceOf} from '@/utils/commonUtils'
+import {formattedDate,parseFaceOf,updateSubMessage} from '@/utils/commonUtils'
 import {insertLeaveMessageData} from '@/services/modules/leaveMessage'
-
+import {changeMessageLeaveDataAction} from '@/store/modules/leaveMessage'
 
 
 
@@ -24,9 +25,12 @@ const TextareaPanel = memo((props) => {
     userInfoData,
     lastMessageId,
     messageIdUpdateHandler,
-    newMessageUpdateHandler,
-    replyInfo
+    replyInfo,
+    messageLeaveData
   } = props;
+
+  // 获取disptch
+  const {dispatch,updateIsShowLeaveMessage} = useContext(ThemeContext)
 
    // 获取textarea
    const textareaRef = useRef(null);
@@ -77,11 +81,13 @@ const TextareaPanel = memo((props) => {
       const currentMessageId = lastMessageId + 1;
       const itemData = {
         messageId: currentMessageId,
-        imgUrl: userInfoData.imgUrl,
-        userName: userInfoData.userName,
-        level: userInfoData.level,
         createTime,
+        likeCount:0,
+        userNickname: userInfoData.userNickname,
+        imgUrl: userInfoData.imgUrl,
+        level: userInfoData.level,
         messageContent,
+        childMessages:[]
       }
       // 更新lastMessageId
       // 将数据写入redux中的newMessage数组中
@@ -98,13 +104,17 @@ const TextareaPanel = memo((props) => {
       // 当parentId为0时，代表是根留言，需要更新父留言的回复数
       if(replyInfo.parentId === 0){
         // 传入值用于更新留言列表
-        newMessageUpdateHandler((
-          <div className="messagePanel-content-item" key={currentMessageId}>
-            <UserDialog itemData={itemData} ></UserDialog>
-          </div>
-        ))
+        dispatch(changeMessageLeaveDataAction([
+          ...messageLeaveData,itemData
+        ]))
       }else{
         // 当parentId不为0时，代表是子留言，不需要更新父留言的回复数
+        // 在所有留言信息中找到parentId对应的留言，在其childMessages数组中添加子留言
+        const newMessageLeaveData = updateSubMessage(messageLeaveData,replyInfo.parentId,itemData)
+        dispatch(changeMessageLeaveDataAction(newMessageLeaveData))
+        // 关闭reply留言板
+        updateIsShowLeaveMessage(false,null)
+        return;
       }
       
       // 清空留言板

@@ -37,8 +37,7 @@ const PageLeaveMessage = memo(() => {
     setReplyInfo(replyInfo)
   },[])
 
-  // 页面上最新添加的留言信息
-  const [newMessage,setNewMessage] = useState('')
+
   /**
    * 函数逻辑
    */
@@ -103,14 +102,11 @@ const PageLeaveMessage = memo(() => {
     dispatch(changeLastMessageIdAction(messageId))
   },[dispatch])
   
-  // 用于更新最新添加的留言信息
-  const newMessageUpdateHandler = useCallback((message) => {
-    setNewMessage([message,...newMessage])
-  },[newMessage])
+  
 
 
   return (
-    <ThemeContext.Provider value={{updateIsShowLeaveMessage}}>
+    <ThemeContext.Provider value={{updateIsShowLeaveMessage,dispatch}}>
       <PageLeaveMessageWrapper>
         <Header/> 
         <div className="leaveMessage-top">
@@ -161,8 +157,6 @@ const PageLeaveMessage = memo(() => {
             userInfoData={userInfoData} 
             lastMessageId={lastMessageId} 
             messageIdUpdateHandler={messageIdUpdateHandler}
-            newMessageUpdateHandler={newMessageUpdateHandler}
-            newMessage={newMessage}
         />
           </div>
         </div>
@@ -180,8 +174,8 @@ const PageLeaveMessage = memo(() => {
                 messageIdUpdateHandler={messageIdUpdateHandler} 
                 lastMessageId={lastMessageId} 
                 facialImgsUrlData={facialImgsUrlData}
-                newMessageUpdateHandler={newMessageUpdateHandler}
                 replyInfo={replyInfo}
+                messageLeaveData={messageLeaveData}
               />
             </div>
           </div>
